@@ -1,12 +1,12 @@
 # Site settings
-title: 'Todd Motto'
-email: todd@toddmotto.com
+title: 'Jonathan Martel'
+email: jmartel@cmaisonneuve.qc.ca
 description: > # this means to ignore newlines until "baseurl:"
-  Articles on JavaScript, Angular, React and HTML5
+  Articles on JavaScript, Angular, React and HTML5 (based on Todd Motto.com)
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://toddmotto.com" # the base hostname & protocol for your site
-twitter_username: toddmotto
-github_username:  toddmotto
+url: "https://jonathanmartel.github.io" # the base hostname & protocol for your site
+twitter_username: jonmartel
+github_username:  jonathanmartel
 include: [_pages]
 exclude: ['node_modules']
 paginate: 11
