@@ -15,7 +15,7 @@ layout: default
             <div class="post-card__tag">
               <img src="{{ site.baseurl }}/img/tags/{% if page.tag %}{{ page.tag }}{% else %}tag{% endif %}.svg" alt="">
             </div>
-            {{ page.date | date: "%b %-d, %Y" }}
+            {{ page.date | date: "%Y-%m-%d" }}
           </div>
           <div class="post-card__meta">
             <div class="post-card__tag">
@@ -23,9 +23,9 @@ layout: default
             </div>
             {% assign words = content | strip_html | number_of_words %}
             {% if words < 360 %}
-              1 min read
+              1 minute de lecture
             {% else %}
-              {{ words | divided_by:200 }} mins read
+              {{ words | divided_by:200 }} minutes de lecture
             {% endif %}
           </div>
               
@@ -69,7 +69,7 @@ layout: default
           <div class="post-card__tag">
             <img src="{{ site.baseurl }}/img/tags/{% if page.previous.tag %}{{ page.previous.tag }}{% else %}tag{% endif %}.svg" alt="">
           </div>
-          {{ page.previous.date | date: "%b %-d, %Y" }}
+          {{ page.previous.date | date: "%Y-%m-%d" }}
         </div>
         <h2 class="post-card__title">
           {{ page.previous.title }}
@@ -87,7 +87,7 @@ layout: default
           <div class="post-card__tag">
             <img src="{{ site.baseurl }}/img/tags/{% if page.next.tag %}{{ page.next.tag }}{% else %}tag{% endif %}.svg" alt="">
           </div>
-          {{ page.next.date | date: "%b %-d, %Y" }}
+          {{ page.next.date | date: "%Y-%m-%d" }}
         </div>
         <h2 class="post-card__title">
           {{ page.next.title }}
