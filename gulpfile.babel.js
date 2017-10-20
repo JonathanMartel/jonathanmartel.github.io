@@ -21,7 +21,7 @@ const jekyllLogger = buffer => {
 const isWin = /^win/.test(process.platform);
 
 const banner = (
-  `/*! toddmotto.com | Todd Motto (c) ${new Date().getFullYear()} */\n`
+  `/*! test ${new Date().getFullYear()} */\n`
 );
 
 const paths = {

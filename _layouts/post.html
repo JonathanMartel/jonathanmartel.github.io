@@ -28,16 +28,7 @@ layout: default
               {{ words | divided_by:200 }} mins read
             {% endif %}
           </div>
-          <div class="post-card__meta">
-            <div class="post-card__tag">
-              <img src="{{ site.baseurl }}/img/icons/github-dark.svg" alt="">
-            </div>
-            {% if page.path %}
-            <a class="post-card-edit" href="//github.com/toddmotto/toddmotto.github.io/blob/master/{{ page.path }}">
-              Edit post
-            </a>
-            {% endif %}
-          </div>
+              
           <!--<div class="post-card__meta">
             <div class="post-card__tag">
               <img src="{{ site.baseurl }}/img/icons/comments.svg" alt="">
@@ -52,16 +43,12 @@ layout: default
     </div>
 
     <div class="post__sidebar">
-      {% include components/featured-course.html %}
-      <div>
-        <script async src="//cdn.carbonads.com/carbon.js?zoneid=1696&serve=CVYD42T&placement=toddmottocom" id="_carbonads_js"></script>
-      </div>
-      {% include components/notify.html sidebar=true %}
+      
     </div>
 
   </section>
 </article>
-
+<!--
 <div class="share">
   <h4 class="share__title">Enjoy this post? Share it!</h4>
   <p>
@@ -71,8 +58,7 @@ layout: default
   <div class="addthis_inline_share_toolbox"></div>
   <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5964f0f2d6581bc8"></script> 
 </div>
-
-{% include courses-alt.html %}
+-->
 
 <div class="post__ending">
 
@@ -126,14 +112,15 @@ layout: default
         <a href="https://twitter.com/toddmotto" class="twitter-follow-button" data-show-count="true"></a>
       </div>
     </div>-->
-    {% include components/notify.html %}
+    
   </div>
 </div>
-
+<!--
 <div class="disqus">
   <div id="disqus_thread"></div>
 </div>
 <!--<script id="dsq-count-scr" src="//toddmotto.disqus.com/count.js" async></script>-->
+<!--
 <script>
   var disqus_url = ({% if page.disqus %}'{{ page.disqus }}'{% else %}'http://toddmotto.com{{ page.url }}'{% endif %}).replace(/\/$/, '');
   var disqus_title = '{{ page.title }}';
@@ -142,3 +129,4 @@ layout: default
   dsq.async = dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
   document.getElementsByTagName('head')[0].appendChild(dsq);
 </script>
+-->

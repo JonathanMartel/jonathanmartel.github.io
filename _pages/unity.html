@@ -1,22 +1,22 @@
 ---
 layout: default
-permalink: /categories/angular
+permalink: /categories/unity
 ---
 
 {% include components/categories.html %}
 
 {% 
 	include components/category-title.html 
-	category="Angular" 
-	icon="angular"
-	text="All articles on Angular (v2+), beginner and advanced posts"
+	category="Unity" 
+	icon="unity"
+	text="Tous les articles sur Unity"
 %}
 
 <div class="posts">
 	{% for post in site.posts %}
-		{% if post.tag == 'angular' %}
+		{% if post.tag == 'unity' %}
 			{% include components/post-card.html %}
 		{% endif %}
   {% endfor %}
-  
+ 
 </div>
