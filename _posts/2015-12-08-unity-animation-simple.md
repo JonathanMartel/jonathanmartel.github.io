@@ -2,7 +2,7 @@
 layout: post
 permalink: /unity-anim-simple
 title: "Animation simple dans Unity avec Mecanim (2D)"
-path: 2017-10-19-unity-animation-simple.md
+path: 2015-12-08-unity-animation-simple.md
 tag: unity
 youtubeId: jdOhch__tnI
 ---
