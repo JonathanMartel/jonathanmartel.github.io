@@ -101,7 +101,7 @@
       @media screen and (max-width: 850px) {
         font-size: 16px;
       }
-      color: #3a4250;
+      color: $couleur-foncee;
       > a {
         font-family: $font--open-sans--semi;
         color: $green;
@@ -201,7 +201,7 @@
     }
     color: #545e6f;
     a {
-      color: #3a4250;
+      color: $couleur-foncee;
       text-decoration: none;
       &:hover {
         color: #888;
@@ -309,7 +309,7 @@
     }
   }
   &__bio {
-    color: #3a4250;
+    color: $couleur-foncee;
     font-size: 15px;
     display: table-cell;
     vertical-align: middle;
@@ -333,7 +333,7 @@
   padding: 64px 0;
   margin: 0 -64px;
   background: #fff;
-  color: #3a4250;
+  color: $couleur-foncee;
   border-bottom: 1px solid #d9e1ef;
   text-align: center;
   @media screen and (max-width: 850px) {

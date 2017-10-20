@@ -1,12 +1,15 @@
 <header class="header">
   <div class="header__img">
-    <img src="{{ site.baseurl }}/img/todd.jpg" alt="Todd Motto">
+    <!--<img src="{{ site.baseurl }}/img/todd.jpg" alt="Todd Motto">-->
     <p>Jonathan Martel</p>
     <span>Enseignant, Collège de Maisonneuve</span>
+    <span>
+     Design et structure basés sur le site de (<a href="//toddmotto.com/">Todd Motto</a>)
+    </span>
   </div>
   <div class="header__twitter">
-    <a href="https://twitter.com/jonmartel" class="twitter-follow-button" data-show-count="true"></a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  <!--  <a href="https://twitter.com/jonmartel" class="twitter-follow-button" data-show-count="true"></a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>-->
   </div>
   <nav class="nav">
     <a href="/" class="nav__link{% if page.url == '/' %} nav__link--active{% endif %}">
@@ -39,7 +42,7 @@
     </a>
     
     <span>
-      &copy; {{ site.time | date: '%Y' }}
+     &copy; {{ site.time | date: '%Y' }}
     </span>
   </div>
 </header>

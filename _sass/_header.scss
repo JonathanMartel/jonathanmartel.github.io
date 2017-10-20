@@ -2,7 +2,7 @@
  * HEADER
  */
 .banner {
-  background: #3a4250;
+  background: $couleur-foncee;
   position: fixed;
   z-index: 9999;
   top: 0;
@@ -19,7 +19,7 @@
 .header {
   padding: 30px 0;
   color: #fff;
-  background: #3a4250;
+  background: $couleur-foncee;
   z-index: 9999;
   position: fixed;
   top: 0;
@@ -41,11 +41,12 @@
   }
   &__img {
     margin: 20px 0 0;
-    height: 50px;
+    
+    
     position: relative;
-    padding: 0 0 0 80px;
+    padding: 0 0 0 20px;
     @media screen and (max-width: 850px) {
-      margin: 20px 0;
+      margin: 0px 0;
     }
     p {
       margin: 0;

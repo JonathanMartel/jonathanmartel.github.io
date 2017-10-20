@@ -10,7 +10,7 @@
 	<g id="Group">
 		<g id="player-angularjs">
 			<rect id="Rectangle-path" x="0.803" y="0.34" fill="#E8ECF7" width="206.242" height="128.908"/>
-			<rect id="Rectangle-path_1_" x="0.75" y="97.34" fill="#3A4250" width="206.491" height="31.996"/>
+			<rect id="Rectangle-path_1_" x="0.75" y="97.34" fill="$couleur-foncee" width="206.491" height="31.996"/>
 			<path id="Shape" fill="#2A303D" d="M195.006,115.477H36.318c-1.42,0-2.568-1.148-2.568-2.568s1.148-2.568,2.568-2.568h158.688
 				c1.42,0,2.568,1.148,2.568,2.568S196.426,115.477,195.006,115.477z"/>
 			<path id="Shape_1_" fill="#C3002F" d="M69.321,110.34H36.318c-1.42,0-2.568,1.148-2.568,2.568s1.148,2.568,2.568,2.568h33.003
