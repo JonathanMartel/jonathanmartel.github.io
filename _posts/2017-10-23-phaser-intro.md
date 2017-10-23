@@ -61,8 +61,8 @@ Pour lire les touches du clavier, nous devons d’abord modifier la fonction `cr
 ```js
 /*Création du personnage et récupération du contrôle avec le clavier*/
 function create() {	// À la creation du jeu 
-   this.heros = jeu.add.sprite(16, 16, 'heros');	// Assignation de l’image dans le personnage.
-	this.clavier = jeu.input.keyboard;
+    this.heros = jeu.add.sprite(16, 16, 'heros');	// Assignation de l’image dans le personnage.
+    this.clavier = jeu.input.keyboard;
 }
 ```
 
