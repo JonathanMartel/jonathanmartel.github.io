@@ -65,27 +65,29 @@ function create() {	// À la creation du jeu
 	this.clavier = jeu.input.keyboard;
 }
 ```
+
 Ensuite, il faut écrire la fonction `update` de sorte qu’elle fasse la lecture des touches pressées et déplace le héros.
 
 ```js 
-/*Sur chaque frame, lire le clavier et agir sur la vitesse de déplacement*/
-function update() {	// Sur chaque frame
-	var velocite = {x:0, y:0};	// La vitesse initiale
-   if(this.clavier.isDown(Phaser.Keyboard.A)) { // Est-ce que la touche A est pressé
+//Sur chaque frame, lire le clavier et agir sur la vitesse de déplacement
+
+function update() {	            // Sur chaque frame
+    var velocite = {x:0, y:0};	// La vitesse initiale
+    if(this.clavier.isDown(Phaser.Keyboard.A)) { // Est-ce que la touche A est pressé
       	velocite.x = -5;	// Vitesse de -5 en x
-   }
-   else if(this.clavier.isDown(Phaser.Keyboard.D)) {  // Est-ce que la touche D est pressé
-   	velocite.x = 5; // Vitesse de 5 en x
-   }
-   if(this.clavier.isDown(Phaser.Keyboard.S)) {	// Est-ce que la touche S est pressé
-   	velocite.y = 5;	// Vitesse de 5 en y
-   }
-   else if(this.clavier.isDown(Phaser.Keyboard.W)) {  // Est-ce que la touche W est pressé
-   	velocite.y = -5; // Vitesse de -5 en y
-   }
-		// Ajout de la vitesse en x et y à la position du personnage.
+    }
+    else if(this.clavier.isDown(Phaser.Keyboard.D)) {  // Est-ce que la touche D est pressé
+        velocite.x = 5; // Vitesse de 5 en x
+    }
+    if(this.clavier.isDown(Phaser.Keyboard.S)) {	// Est-ce que la touche S est pressé
+        velocite.y = 5;	// Vitesse de 5 en y
+    }
+    else if(this.clavier.isDown(Phaser.Keyboard.W)) {  // Est-ce que la touche W est pressé
+        velocite.y = -5; // Vitesse de -5 en y
+    }
+    // Ajout de la vitesse en x et y à la position du personnage.
     this.heros.x += velocite.x;
-    this.heros.y += velocite.y;
+this.heros.y += velocite.y;
     
 }
 ```
