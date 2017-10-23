@@ -1,0 +1,22 @@
+---
+layout: default
+permalink: /categories/php
+---
+
+{% include components/categories.html %}
+
+{% 
+	include components/category-title.html 
+	category="PHP" 
+	icon="php"
+	text="Tous les articles sur PHP"
+%}
+
+<div class="posts">
+	{% for post in site.posts %}
+		{% if post.tag == 'php' %}
+			{% include components/post-card.html %}
+		{% endif %}
+  {% endfor %}
+ 
+</div>
