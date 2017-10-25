@@ -22,8 +22,8 @@ D'abord, je vous propose de voir les stratégies qui permettront d'attacher des 
 
 Dans un premier temps, le HTML sera intégré directement dans le code source afin de faciliter le développement. Ensuite, le code sera ajusté pour tenir compte d'une création dynamique du contenu HTML.
 Prenons le code HTML suivant. Celui-ci affiche des "cartes" avec des informations qui pourraient provenir d'une source externe. 
-<script async src="//jsfiddle.net/JonathanMartel/mmotvpee/7/embed/html,css,result/"></script>
 
+<iframe width="100%" height="400" src="//jsfiddle.net/JonathanMartel/mmotvpee/7/embedded/html,css,result/" frameborder="0"></iframe>
 Voyons maintenant comment parcourir les éléments DOM pour y attacher les gestionnaires d'événement. D'abord, il faut récupérer un tableau des éléments HTML.
 ```js
 var lesCartes = document.querySelectorAll(".carte");
@@ -74,8 +74,8 @@ btnActions[j].addEventListener("click", (function(valeur_j){
 > La IIFE retourne une nouvelle fonction à chaque boucle. Le paramètre `j` conserve alors sa valeur pour la fonction retournée.
 
 Le résultat peut être testé ici : 
-<script async src="//jsfiddle.net/JonathanMartel/mmotvpee/11/embed/"></script>
 
+<iframe width="100%" height="400" src="//jsfiddle.net/JonathanMartel/mmotvpee/11/embedded/" frameborder="0"></iframe>
 Une fois les gestionnaires d'événement attachés, ne reste qu'à générer dynamique le contenu.
 
 ### Création dynamique de contenu HTML
@@ -111,20 +111,20 @@ for(var k=0; k<donnees.length;k++){
   }
 ```
 Vous pouvez tester le code ici :
-<script async src="//jsfiddle.net/JonathanMartel/mmotvpee/15/embed/"></script>
-
+<iframe width="100%" height="400" src="//jsfiddle.net/JonathanMartel/mmotvpee/15/embedded/" frameborder="0"></iframe>
 #### Optimisation de la solution
 Bien que fonctionnel, le code mériterait un remaniement du code (*refactoring*). 
 
 D'abord, remplaçons les boucles par des [`forEach()`](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/forEach). 
-<script async src="//jsfiddle.net/JonathanMartel/mmotvpee/16/embed/"></script>
+<iframe width="100%" height="400" src="//jsfiddle.net/JonathanMartel/mmotvpee/16/embedded/" frameborder="0"></iframe>
 En plus de rendre le code plus lisible et de réduire le nombre de variables utilisées (i,j,k), le remaniement nous permet de se débarasser de la IIFE qui servait à factoriser le gestionnaire d'événement sur les boutons d'action. En effet, la boucle forEach, en plus de donner en paramètre l'élément du tableau, passe comme second paramètre l'index du tableau.
 
 Mantenant, il reste un problème. L'intégration du HTML directement dans le code HTML n'est pas forcément une bonne pratique. Il serait intéressant de trouver une solution alternative qui permettrait de sortir le code de la "carte" et de laisser la structure dans le document HTML. C'est notamment le rôle de l'élément [`<template>`](https://developer.mozilla.org/fr/docs/Web/HTML/Element/template).
 
 ### Utilisation des &lt;template&gt;
 Dans un premier temps, nous allons utiliser un template pour produire le même contenu HTML plusieurs fois. Ensuite, nous developperons, de manière simple, un mini-système de gestion des gabarits (à la manière de [{{ mustache}}](https://github.com/janl/mustache.js)).
-> Les templates HTML 
+
+
 Premièrement, il faut définir le template. Dans le fichier index.html, nous ajouterons 
 ```html
 <template id="modeleCarte">
@@ -149,8 +149,7 @@ donnees.forEach(function(article) {
     catalogue.appendChild(document.importNode(carte.content, true))
 });
 ```
-<script async src="//jsfiddle.net/JonathanMartel/mmotvpee/18/embed/"></script>
-
+<iframe width="100%" height="400" src="//jsfiddle.net/JonathanMartel/mmotvpee/18/embedded/" frameborder="0"></iframe>
 Il faut maintenant créer une système qui permet d'insérer le contenu du tableau de données dans les gabarits. Pour ce faire, nous allons utiliser une syntaxe similaire à celle de l'engin de gabarit [{{ mustache}}](https://github.com/janl/mustache.js). Nous allons insérer le nom de propriété dans le template avec un préfixe et un suffixe que l'on ne retrouve pas normalement dans le code HTML ou dans un texte.
 ```html
 <template id="modeleCarte">
@@ -172,15 +171,14 @@ for (var cle in article){       // Pour chaque propriété des articles (provena
     carte.innerHTML = carte.innerHTML.replace("\{\{" + cle + "\}\}", article[cle]);
 }
 ```
-<script async src="//jsfiddle.net/JonathanMartel/mmotvpee/19/embed/"></script>
-
+<iframe width="100%" height="400" src="//jsfiddle.net/JonathanMartel/mmotvpee/19/embedded/" frameborder="0"></iframe>
 Maintenant, nous avons réglé la majorité des problèmes en créant un mini-système de gestion des gabarits. 
 
 > Il faut noter que l'utilisation de ES5 est ici voulu. 
 
 ### Et ES6 ?
 Pour le plaisir, vous trouverez une version du même code en ES6. Ce dernier utilise `let`, `const` et les *arrows functions*. Notez que ce dernier pourrait ne pas fonctionner avec l'ensemble des navigateurs.
-<script async src="//jsfiddle.net/JonathanMartel/mmotvpee/20/embed/"></script>
+<iframe width="100%" height="400" src="//jsfiddle.net/JonathanMartel/mmotvpee/20/embedded/" frameborder="0"></iframe>
 
 
 
