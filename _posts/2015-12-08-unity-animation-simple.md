@@ -5,6 +5,7 @@ title: "Animation simple dans Unity avec Mecanim (2D)"
 path: 2015-12-08-unity-animation-simple.md
 tag: unity
 youtubeId: jdOhch__tnI
+status: publish
 ---
 
 Dans ce tutoriel, vous apprendrez comment créer une animation simple avec Unity et le système Mecanim. (Attention, le son est mauvais)

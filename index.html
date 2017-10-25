@@ -6,7 +6,9 @@ layout: default
 
 <div class="posts">
   {% for post in paginator.posts %}
-    {% include components/post-card.html %}
+    {% if post.status == 'publish' %}
+        {% include components/post-card.html %}
+    {% endif %}
   {% endfor %}
   
 </div>

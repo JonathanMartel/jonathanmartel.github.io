@@ -14,7 +14,9 @@ permalink: /categories/tous
 
 <div class="posts">
 	{% for post in site.posts %}
-		{% include components/post-card.html %}
+        {% if post.status == 'publish' %}
+		  {% include components/post-card.html %}
+        {% endif %}
     {% endfor %}
   
 </div>

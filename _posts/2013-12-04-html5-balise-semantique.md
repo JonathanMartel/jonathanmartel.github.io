@@ -4,7 +4,7 @@ permalink: /html5-semantique
 title: "Les balises de séparation sémantique (sectionning)"
 path: 2013-12-04-html5-balise-semantique.md
 tag: html5
- 
+status: publish 
 ---
 
 Le HTML5 apporte son lot de nouvelles balises et leur usage peut parfois prêter à confusion. Ce présent article vise à éclairer les développeurs et les intégrateurs débutant dans l’univers du HTML5. Nous y présenterons les nouvelles balises de division sémantique (ou sectionning) en référence aux usages prescrits par le [W3C](https://www.w3.org/TR/html5/sections.html)

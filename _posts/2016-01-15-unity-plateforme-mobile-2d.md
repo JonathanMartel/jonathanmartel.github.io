@@ -5,6 +5,7 @@ title: "Création d’un jeu de plateforme pour Unity 2D – Plateforme mobile (
 path: 2016-01-15-unity-plateforme-mobile-2d.md
 tag: unity
 youtubeId: 7LxXd7_UvMQ
+status: publish
 ---
 
 Dans cette troisième partie ([partie 1](/unity-plateforme-controleur-personnage-2d), [partie 2](/unity-plateforme-controleur-personnage-animation-2d)), vous apprendrez créer des plateformes mobiles et d’ajuster le script de votre personnage afin qu’il ne glisse pas sur ces plateformes lorsqu’elles se déplacent. Dans la quatrième partie du tutoriel (à venir), vous apprendrez comment instancier des projectiles et créer des ennemis mobiles et animés.

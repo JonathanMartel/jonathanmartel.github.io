@@ -4,6 +4,7 @@ permalink: /js-classes-es6
 title: "Les classes ECMAScript 6"
 path: 2017-10-19-js-classes-es6.md
 tag: js
+status: publish
 ---
 
 L'ECMAScript 2015 ou ES6 fait apparaître un ajout syntaxiquement intéressant dans la gestion des objets en JavaScript. Le TC39 ajoute une déclaration de classe qui, sans remplacer l'héritage prototypal et la gestion des objets, simplie leur déclaration. Celle-ci ne règle pas les problèmes d'espace privé déjà présente en JavaScript. Il faudra attendre encore quelques mois/années avant que les [espaces privés](https://tc39.github.io/proposal-class-fields/) ne fassent leur apparition.

@@ -14,7 +14,7 @@ permalink: /categories/php
 
 <div class="posts">
 	{% for post in site.posts %}
-		{% if post.tag == 'php' %}
+		{% if post.tag == 'php' and post.status == 'publish' %}
 			{% include components/post-card.html %}
 		{% endif %}
   {% endfor %}

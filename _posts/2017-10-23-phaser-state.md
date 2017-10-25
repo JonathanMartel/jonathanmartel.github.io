@@ -4,6 +4,7 @@ permalink: /phaser-state
 title: "Gestion des états"
 path: 2017-10-23-phaser-state.md
 tag: phaser
+status: draft
 ---
 
 Phaser reprend globalement le fonctionnement d’un automate fini (Finite-state machine). Le contrôle du déroulement du jeu se fait en passant d’un état vers un autre selon certaines conditions. Chaque état s’occupe du déroulement d’une séquence précise du jeu, telle que le chargement ou bien l’affichage du menu d’introduction. Par ailleurs, un état peut se charger de la totalité du déroulement du jeu. Chacun de ces états possèdent son propre déroulement au travers de l’appel de méthodes prédéfinies. 
