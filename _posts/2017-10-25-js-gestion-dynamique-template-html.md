@@ -182,7 +182,7 @@ Maintenant, nous avons réglé la majorité des problèmes en créant un mini-sy
 
 
 ### Et ES6 ?
-Pour le plaisir, vous trouverez une version du même code en ES6. Ce dernier utilise [let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let), [const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) et les [*arrows functions*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions). Notez que le code r pourrait ne pas fonctionner avec l'ensemble des navigateurs.
+Pour le plaisir, vous trouverez une version du même code en ES6. Ce dernier utilise [let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let), [const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) et les [*arrows functions*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions). Notez que le code pourrait ne pas fonctionner avec l'ensemble des navigateurs.
 <iframe width="100%" height="400" src="//jsfiddle.net/JonathanMartel/mmotvpee/20/embedded/" frameborder="0"></iframe>
 
 
@@ -190,9 +190,9 @@ Pour le plaisir, vous trouverez une version du même code en ES6. Ce dernier uti
 
 
 ### Sources :
-https://github.com/janl/mustache.js
-https://developer.mozilla.org/fr/docs/Web/API/Document/importNode
-https://developer.mozilla.org/fr/docs/Web/HTML/Element/template
-https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach
-http://benalman.com/news/2010/11/immediately-invoked-function-expression/
-https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Fonctions/Fonctions_fl%C3%A9ch%C3%A9es
+* [https://github.com/janl/mustache.js](https://github.com/janl/mustache.js)
+* [https://developer.mozilla.org/fr/docs/Web/API/Document/importNode](https://developer.mozilla.org/fr/docs/Web/API/Document/importNode)
+* [https://developer.mozilla.org/fr/docs/Web/HTML/Element/template](https://developer.mozilla.org/fr/docs/Web/HTML/Element/template)
+* [https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach](https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach)
+* [http://benalman.com/news/2010/11/immediately-invoked-function-expression/](http://benalman.com/news/2010/11/immediately-invoked-function-expression/)
+* [https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Fonctions/Fonctions_fl%C3%A9ch%C3%A9es](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Fonctions/Fonctions_fl%C3%A9ch%C3%A9es)
