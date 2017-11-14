@@ -1,0 +1,22 @@
+---
+layout: default
+permalink: /categories/phaser
+---
+
+{% include components/categories.html %}
+
+{% 
+	include components/category-title.html 
+	category="Phaser" 
+	icon="js"
+	text="Tous les articles sur Phaser.io"
+%}
+
+<div class="posts">
+	{% for post in site.posts %}
+		{% if post.tag == 'phaser' and post.status == 'publish'%}
+			{% include components/post-card.html %}
+		{% endif %}
+  {% endfor %}
+  
+</div>

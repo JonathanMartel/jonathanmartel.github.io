@@ -1,20 +1,24 @@
 <div class="categories">
-  <p>Catégories:</p>
-  <div class="categories__container">
-    <a href="/categories/tous" {% if page.url == '/categories/tous' %}class="active"{% endif %}>
+    <p>Catégories:</p>
+    <div class="categories__container">
+        <a href="/categories/tous" {% if page.url=='/categories/tous' %}class="active" {% endif %}>
       Tous
     </a>
-    <a href="/categories/javascript" {% if page.url == '/categories/javascript' %}class="active"{% endif %}>
+        <a href="/categories/javascript" {% if page.url=='/categories/javascript' %}class="active" {% endif %}>
       <img src="/img/tags/js.svg" alt="Tous les articles sur JavaScript">
       JavaScript
     </a>
-    <a href="/categories/unity" {% if page.url == '/categories/unity' %}class="active"{% endif %}>
+        <a href="/categories/phaser" {% if page.url=='/categories/phaser' %}class="active" {% endif %}>
+      <img src="/img/tags/js.svg" alt="Tous les articles sur Phaser.io">
+      Phaser.io
+    </a>
+        <a href="/categories/unity" {% if page.url=='/categories/unity' %}class="active" {% endif %}>
       <img src="/img/tags/unity.svg" alt="Tous les articles sur Unity">
       Unity
     </a>
-    <a href="/categories/php" {% if page.url == '/categories/php' %}class="active"{% endif %}>
+        <a href="/categories/php" {% if page.url=='/categories/php' %}class="active" {% endif %}>
       <img src="/img/tags/php.svg" alt="Tous les articles sur PHP">
       PHP
     </a>
-  </div>
+    </div>
 </div>

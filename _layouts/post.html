@@ -62,7 +62,7 @@ layout: default
 
 <div class="post__ending">
 
-  {% if page.previous.url %}
+  {% if page.previous.url and page.previous.status == 'publish' %}
     <div class="post-card">
       <a href="{{ page.previous.url | prepend: site.baseurl }}" class="post-card__content" title="Read {{ page.previous.title }}">
         <div class="post-card__meta">
@@ -80,7 +80,7 @@ layout: default
       </a>
     </div>
   {% endif %}
-  {% if page.next.url %}
+  {% if page.next.url and page.next.status == 'publish' %}
     <div class="post-card">
       <a href="{{ page.next.url | prepend: site.baseurl }}" class="post-card__content" title="Read {{ page.next.title }}">
         <div class="post-card__meta">
