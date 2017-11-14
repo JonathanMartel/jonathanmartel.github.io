@@ -14,7 +14,7 @@ permalink: /categories/angularjs
 
 <div class="posts">
 	{% for post in site.posts %}
-		{% if post.tag == 'angularjs' %}
+		{% if post.tag == 'angularjs' and post.status == 'publish'%}
 			{% include components/post-card.html %}
 		{% endif %}
   {% endfor %}

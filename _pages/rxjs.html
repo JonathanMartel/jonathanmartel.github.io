@@ -14,7 +14,7 @@ permalink: /categories/rxjs
 
 <div class="posts">
 	{% for post in site.posts %}
-		{% if post.tag == 'rxjs' %}
+		{% if post.tag == 'rxjs' and post.status == 'publish' %}
 			{% include components/post-card.html %}
 		{% endif %}
   {% endfor %}
