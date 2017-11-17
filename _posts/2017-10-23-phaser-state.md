@@ -36,9 +36,9 @@ var jeu = (function(){
 })();
 ```
 
-Chaque état doit être défini comme un objet et surcharger les méthodes de la classe `Phaser.State` qu'il utilise. Aucunes méthodes ne sont explicitement nécessaires pour qu'un état soit fonctionnel, seules les méthodes nécessaire doivent être surchargée.
+Chaque état doit être défini comme un objet et surcharger les méthodes de la classe `Phaser.State` qu'il utilise. Aucunes méthodes ne sont explicitement nécessaires pour qu'un état soit fonctionnel, seules les méthodes nécessaires doivent être surchargées.
 
-Voici l'état Chargement.
+Pour fin d'exemple, voici l'état `Chargement`:
 ```js
 var chargement = (function(){
     var _jeu;
@@ -91,6 +91,9 @@ Cette méthode est appelée après que le rendu du jeu soit effectué. Cela perm
 > Notez qu'il existe d'autres méthodes qui ne sont pas couvertes ici. Voir [Phaser.State](https://photonstorm.github.io/phaser-ce/Phaser.State.html)
 
 ### Création d'un jeu simple avec des états
+La création d'un jeu avec des états demande une petite planification. Il faut d'abord déterminer quels seront ces états. Les états suivent habituellement la séquence d'un jeu. Initialement, nous voyons l'introduction, le menu de départ, le "jeu" et l'écran de victoire/défaite. Chaqu'un de ces éléments peuvent être un état. Par contre, d'autres, moins liés à la séquence de jeu, sont souvent nécessaires. Il pourrait y avoir un état `Pré-chargement`, responsable de charger rapidement les éléments nécessaires à l'intro ou bien à l'écran de chargement. Ensuite, l'écran `Chargement` ou `Intro` qui permet d'avoir une barre de progression du chargement des ressources nécessaires au jeu ou bien de jouer une animation d'introduction, pendant lequel les ressources du jeu seront chargées.
+
+L'exemple suivant utilisera les états suivants : Prechargement, Chargement, Menu, Jeu, Gagnant et Perdant.
 
 
 
