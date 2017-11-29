@@ -56,28 +56,26 @@ function create() {	// À la creation du jeu
 ```
 
 #### Contrôle du personnage dans la boucle du jeu
-Nous voyons maintenant notre héros dans notre jeu. Maintenant, il ne reste qu’à faire en sorte que le personnage poursuive le curseur de la souris. Pour ce faire, nous allons utiliser la méthode assignée à l’état `update`. Sur chaque image-clé, nous vérifions que la position de la souris et nous déplaçons le personnage en conséquence.
+Nous voyons maintenant notre héros dans notre jeu. Maintenant, il ne reste qu’à faire en sorte que le personnage poursuive le curseur de la souris. Pour ce faire, nous allons utiliser la méthode assignée à l’état `update`. Sur chaque image-clé, nous vérifions que la position de la souris à l'aide de la classe [Phaser.Input](https://photonstorm.github.io/phaser-ce/Phaser.Input.html) et nous déplaçons le personnage en conséquence.
  
-Il faut donc écrire la fonction `update` de sorte qu’elle fasse la lecture de la position de la souris déplace le héro.
-
-
+Il faut donc écrire la fonction `update` de sorte qu’elle fasse la lecture de la position de la souris déplace le héro. 
 ```js
 // Sur chaque frame, lire la position de la souris et déplacer le hero
 function update() {	            // Sur chaque frame
-   this.hero.x = jeu.input.mousePointer.x;
+   this.hero.x = jeu.input.mousePointer.x;      // Lecture de la position de la souris et assignation de la nouvelle position au héro
    this.hero.y = jeu.input.mousePointer.y;
 }
 ```
 
 
 #### Ajouter d'autres personnages
-Pour rendre le jeu plus intéressant, nous pourrions ajouter un ennemi qui essai d'attraper le personnage. Il n’y a qu’à ajouter une ressource qui contiendra l’image de celui-ci dans le `preload` et placer cette image dans un sprite sur le jeu. 
+Pour rendre le jeu plus intéressant, nous pourrions ajouter un ennemi qui essai d'attraper le personnage. Il n’y a qu’à ajouter une ressource qui contiendra l’image de celui-ci dans le `preload` et placer cette image dans un sprite sur le jeu ([Phaser.Sprite](https://photonstorm.github.io/phaser-ce/Phaser.Sprite.html)). 
 
 La fonction `preload` deviendra :
 ```js
 function preload() {	// Chargement du jeu 
     jeu.load.image('hero', 'assets/hero.png');
-    jeu.load.image('ennemi', 'assets/ennemi.png'); 
+    jeu.load.image('ennemi', 'assets/ennemi.png');  // Chargement de la nouvelle image.
 }
 ```
 
@@ -85,7 +83,7 @@ Et la fonction create deviendra :
 ```js
 function create() {	// À la creation du jeu 
  	this.hero = jeu.add.sprite(16, 16, 'hero');
-	this.ennemi = jeu.add.sprite(16, 16, 'ennemi');
+	this.ennemi = jeu.add.sprite(16, 16, 'ennemi');    // Nouveau sprite
 	this.ennemi.x = jeu.width/2;	// Place l’ennemi dans le centre du jeu
 	this.ennemi.y = jeu.height/2;
 }
@@ -107,7 +105,7 @@ function update() {	            // Sur chaque frame
 }
 ```
 Maintenant, l'ennemi poursuit le héro. Mais il manque une condition qui permet à l'ennemi de "gagner" ou bien d'arrêter la poursuite lorsqu'il a rattrapé le héro.
-On ajoutera donc une fonction qui permet de vérifier que les deux sprites se touche et ajouter la condition dans la boucle d'update.
+On ajoutera donc une fonction qui permet de vérifier que les deux sprites se touche et ajouter la condition dans la boucle d'update ([Phaser.Rectangle](https://photonstorm.github.io/phaser-ce/Phaser.Rectangle.html)).
 ```js
 // La fonction reçoit deux sprites et vérifie si leur limite entre en intersection l'un avec l'autre. Elle retourne un booléen.
 function verifCollision(a,b){
