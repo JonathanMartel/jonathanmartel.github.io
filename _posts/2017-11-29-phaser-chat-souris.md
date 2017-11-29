@@ -44,7 +44,7 @@ function preload() {	// Chargement du jeu
 	jeu.load.image('hero', 'assets/heros.png');   // Chargement de l'image heros.png et assignation de la "clé" "hero" à celle-ci.
 }
 ```
-#### Créaction des éléments du jeu
+#### Création des éléments du jeu
 Une fois le chargement des ressources exécutées, le moteur de jeu appel la méthode assigné à l’état `create`. C’est ici que l’on crée les éléments du jeu qui apparaitront sur la scène. 
 
 L’exemple suivant montre comment l’on créer le personnage à partir de l’image chargée. Le personnage sera ici un sprite avec une seule image qui le représente (hero.png). Il sera créé à la coordonnée (16, 16) de la scène. Notez que le point d'origine (0,0) est placé dans le coin supérieur droit. 
@@ -68,7 +68,7 @@ function update() {	            // Sur chaque frame
 ```
 
 
-#### Ajouter d'autres personnages
+#### Ajouter d'autres personnages et des interactions
 Pour rendre le jeu plus intéressant, nous pourrions ajouter un ennemi qui essai d'attraper le personnage. Il n’y a qu’à ajouter une ressource qui contiendra l’image de celui-ci dans le `preload` et placer cette image dans un sprite sur le jeu ([Phaser.Sprite](https://photonstorm.github.io/phaser-ce/Phaser.Sprite.html)). 
 
 La fonction `preload` deviendra :
