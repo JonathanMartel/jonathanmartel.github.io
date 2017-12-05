@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /phaser-state
+permalink: /phaser-physics-arcade-mouvement
 title: "Physique Arcade et mouvement"
 path: 2017-12-05-phaser-arcade-physique-mouvement.md
 tag: phaser
