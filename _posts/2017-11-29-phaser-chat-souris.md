@@ -3,7 +3,7 @@ layout: post
 permalink: /phaser-chat-souris
 title: "Création d’un jeu simple de poursuite"
 path: 2017-11-29-phaser-chat-souris.md
-tag: phaser
+tag: phaserio
 status: publish
 ---
 

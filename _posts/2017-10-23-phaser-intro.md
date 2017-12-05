@@ -3,7 +3,7 @@ layout: post
 permalink: /phaser-intro
 title: "Création d’un jeu simple"
 path: 2017-10-23-phaser-intro.md
-tag: phaser
+tag: phaserio
 status: draft
 ---
 

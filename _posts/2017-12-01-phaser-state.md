@@ -3,7 +3,7 @@ layout: post
 permalink: /phaser-state
 title: "Gestion des états"
 path: 2017-12-01-phaser-state.md
-tag: phaser
+tag: phaserio
 status: publish
 ---
 
