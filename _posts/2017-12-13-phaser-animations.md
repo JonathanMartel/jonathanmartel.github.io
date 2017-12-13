@@ -4,7 +4,7 @@ permalink: /phaser-animations
 title: "Animation des sprites à partir de spritesheet"
 path: 2017-12-13-phaser-animations.md
 tag: phaserio
-status: publish
+status: draft
 ---
 
 Dans cet article, nous allons voir comment gérer les animations des sprites avec Phaser. Les animations des sprites ne sont qu'un simple changement de texture fait selon une cadence (*framerate*) spécifique. Pour créer une animation, il faut donc fournir une séquence de textures empaquettées dans un seul fichier source (png, jpg, etc). Cette séquence d'image, appelée *spritesheet* ou *texture atlas*, sera utilisée comme source de texture. Chaque *frame* sera une image de la séquence. Une animation d'une seconde à une cadence de 30 images par seconde aura 30 images dans son spritesheet. Plusieurs outils permettent de créer des spritesheets. Les spritesheets utilisés ici ont été créé à partir de Adobe Animate.
