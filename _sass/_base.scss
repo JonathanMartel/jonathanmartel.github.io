@@ -6,12 +6,13 @@
 $white: #fff;
 $blue: #2996d6;
 $purple: #d82c99;
-$brand: #7953b5;
-$text-color: #455A64;/*#3a4250;*/
-$text-color-light: #999;
+$brand: #604C8D;
+$text-color: #4B5D9A;/*#455A64; *//*#3a4250;*/
+    
+$text-color-light: lighten($text-color, 30%);
 $border-color: #E6E6E6;
 $green: $brand;
-$couleur-foncee: #455A64;
+$couleur-foncee: #604C8D /*#455A64*/;
 
 /* ==========================================================================
    Base styles: opinionated defaults

@@ -102,7 +102,7 @@
       @media screen and (max-width: 850px) {
         font-size: 16px;
       }
-      color: $couleur-foncee;
+      color: $text-color;
       > a {
         font-family: $font--open-sans--semi;
         color: $green;
@@ -200,7 +200,7 @@
       font-size: 28px;
       line-height: 32px;
     }
-    color: #545e6f;
+    color: $text-color;
     a {
       color: $couleur-foncee;
       text-decoration: none;
