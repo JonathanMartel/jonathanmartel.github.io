@@ -4,7 +4,7 @@ permalink: /phaser-animations
 title: "Animation des sprites à partir de spritesheet"
 path: 2017-12-13-phaser-animations.md
 tag: phaserio
-status: draft
+status: publish
 ---
 
 Dans cet article, nous allons voir comment gérer les animations des sprites avec Phaser. Les animations des sprites sont un simple changement d'image dans un sprite fait selon une cadence (*framerate*) spécifique. Pour créer une animation, il faut donc fournir une séquence d'image empaquettées dans un seul fichier source (png, jpg, etc). Cette séquence d'image, appelée *spritesheet*, sera utilisée comme source. Chaque *frame* sera une image de la séquence. Une animation d'une seconde à une cadence de 30 images par seconde aura 30 images dans son *spritesheet*. Plusieurs outils permettent de créer des *spritesheets*, ceux utilisés dans cet article l'ont été à partir de Adobe Animate.
