@@ -9,13 +9,7 @@ status: draft
 Source : 
 https://gist.github.com/jdnichollsc/f4f4af1cc6aa697bb274
 
-
-Dans cet article, nous allons voir comment gérer les animations des sprites avec Phaser. Les animations des sprites ne sont qu'un simple changement de texture fait selon une cadence (*framerate*) spécifique. Pour créer une animation, il faut donc fournir une séquence de textures empaquettées dans un seul fichier source (png, jpg, etc). Cette séquence d'image, appelée *spritesheet* ou *texture atlas*, sera utilisée comme source de texture. Chaque *frame* sera une image de la séquence. Une animation d'une seconde à une cadence de 30 images par seconde aura 30 images dans son spritesheet. Plusieurs outils permettent de créer des spritesheets. Les spritesheets utilisés ici ont été créé à partir de Adobe Animate.
-
-> La différence entre un *spritesheet* et un *texture atlas* est que le premier contient uniquement des éléments de même taille, tandis que le second contient un ensemble d'images (ou textures) empaquettées qui peuvent être de différente taille. Les animations seront fait à partir de spritesheet.
-
-D'abord, nous expliquerons comment utiliser un *spritesheet* simple pour animer un sprite. Ensuite, nous verrons comment utiliser un fichier JSON qui permet de gérer plusieurs animations avec un seul *spritesheet*.
-
+Cet article porte sur les techniques et stratégies qui permettent d'adapter la dimension des jeux faits avec Phaser pour divers types d'écran. Deux stratégies seront explorées soit (1) l'adaptation de la dimension de la vue du jeu et (2) l'ajustement de la dimension du jeu en maintenant une proportion constante. 
 
 <div class="toc" markdown="1">
 <span class="gamma">Table des matières</span>
@@ -23,6 +17,25 @@ D'abord, nous expliquerons comment utiliser un *spritesheet* simple pour animer 
 * TOC
 {:toc}
 </div>
+
+
+
+La multitude des modèles et taille de périphérique est un enjeu constant de le développement Web. Si pour une page Web, la fluidité des contenus comme le texte est assez simple à mettre en oeuvre sur plusieurs tailles de périphérique, l'expérience immersive du jeu demande un ajustement plus précis et occupant l'entièreté de la page. Pour y arriver, il y a principalement 2 stratégies qui peuvent être déployées. La première consiste à adapter la vue ou la taille de la caméra du jeu en fonction de la taille et de la proportion du périphérique. Un écran plus large donnera une plus grande vue sur le jeu en largeur et un écran plus haut donnera un point de vue plus haut dans le jeu. De cette manière, le jeu occupera toujours 100% de la dimension de l'écran. La deuxième solution consite à fixer la taille de la vue du jeu à une certaine taille et une certaine proportion (9:16 par exemple) et d'ajuster la taille de la vue pour maximiser la dimension du jeu dans le périphérique. Ainsi, le jeu occupera 100% de la hauteur ou 100% de la largeur de l'écran. Le reste sera comblé par un espace vide autour du jeu. 
+
+> Inséré ici des captures d'écran qui montre ce que j'explique...
+
+
+
+
+
+S'est d'autant vrai pour les jeux puisque n
+Dans cet article, nous allons voir comment gérer les animations des sprites avec Phaser. Les animations des sprites ne sont qu'un simple changement de texture fait selon une cadence (*framerate*) spécifique. Pour créer une animation, il faut donc fournir une séquence de textures empaquettées dans un seul fichier source (png, jpg, etc). Cette séquence d'image, appelée *spritesheet* ou *texture atlas*, sera utilisée comme source de texture. Chaque *frame* sera une image de la séquence. Une animation d'une seconde à une cadence de 30 images par seconde aura 30 images dans son spritesheet. Plusieurs outils permettent de créer des spritesheets. Les spritesheets utilisés ici ont été créé à partir de Adobe Animate.
+
+> La différence entre un *spritesheet* et un *texture atlas* est que le premier contient uniquement des éléments de même taille, tandis que le second contient un ensemble d'images (ou textures) empaquettées qui peuvent être de différente taille. Les animations seront fait à partir de spritesheet.
+
+D'abord, nous expliquerons comment utiliser un *spritesheet* simple pour animer un sprite. Ensuite, nous verrons comment utiliser un fichier JSON qui permet de gérer plusieurs animations avec un seul *spritesheet*.
+
+
 
 > L'ensemble des exemples montré sont partiels, c'est-à-dire que le code montré n'est pas complet. Les parties du code non montré ont déjà fait l'objet d'un article précédent. Le code complet est disponible sur Github : [Code complet](#)
 
