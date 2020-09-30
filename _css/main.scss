@@ -1,10 +1,7 @@
----
-# Only the main Sass file needs front matter (the dashes are enough)
----
-@charset "utf-8";
+﻿@charset "utf-8";
 
 
-@import "vendor";
+@import "_sass/vendor";
 
 
 
@@ -49,10 +46,10 @@ $tablet:          700px;
 
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
-        "base",
-        "layout",
-        "header",
-        "post",
-        "syntax-highlighting",
-        "new"
+        "_sass/base",
+        "_sass/layout",
+        "_sass/header",
+        "_sass/post",
+        "_sass/syntax-highlighting",
+        "_sass/new"
 ;

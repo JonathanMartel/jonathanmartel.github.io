@@ -7,17 +7,24 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://jonathanmartel.github.io" # the base hostname & protocol for your site
 twitter_username: jonmartel
 github_username:  jonathanmartel
-include: [_pages]
-exclude: ['node_modules']
+include: ['_pages']
+exclude: ['node_modules', '_site']
 paginate: 11
 paginate_path: "/page:num/"
-permalink: /:year/:month/:title
+permalink: pretty 
 sass:
   compressed: true
+
+collections:
+  note_javascript:
+    output: true
+    sort_by: order
 
 # Build settings
 markdown: kramdown
 highlighter: rouge
+
+
 
 # Gems
 plugins: [jekyll-paginate]
@@ -39,3 +46,4 @@ kramdown:
     block:
       line_numbers: true
       start_line: 1
+

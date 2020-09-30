@@ -4,10 +4,22 @@
       <p><a href="/">Jonathan Martel</a></p>
     <span>Enseignant, Collège de Maisonneuve</span>
     <span>
-     Design et structure basés sur le site de (<a href="//toddmotto.com/">Todd Motto</a>)
+     Design et structure basés sur le travail de <a href="//toddmotto.com/">Todd Motto</a> (2018)
     </span>
   </div>
+  <span class="gamma">Table des matières</span>
+  {% if page.toc %}
+    {% include components/toc-{{ page.toc}}.html %}
+  {% endif %}
+
+
+
+  </div>
+
   <div class="header__twitter">
+
+
+
   <!--  <a href="https://twitter.com/jonmartel" class="twitter-follow-button" data-show-count="true"></a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>-->
   </div>
