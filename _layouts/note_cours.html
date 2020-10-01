@@ -1,18 +1,49 @@
 ---
-layout: default
+layout: note
 ---
-{{page.collection}}
 
 
-{% for collection in site.collections %}
-  {% if collection.label == page.collection %}
-  
-    {% for section in collection.docs  %}
-    <div class="section">
-      <ul><li><a href="{{ section.url }}">{{ section.title }}</a></li></ul>
+<article class="post single">
+  <section class="post__content">
+    <div class="post__detail">
+    <header class="post__header">
+      <h1 class="alpha post__title" itemprop="name headline">
+        {{ page.title }}
+        <div class="post-card__container">
+          <div class="post-card__meta">
+            <div class="post-card__tag">
+              <img src="{{ site.baseurl }}/img/tags/{% if page.tag %}{{ page.tag }}{% else %}tag{% endif %}.svg" alt="">
+            </div>
+            {{ page.date | date: "%Y-%m-%d" }}
+          </div>
+          <div class="post-card__meta">
+            <div class="post-card__tag">
+              <img src="{{ site.baseurl }}/img/tags/time.svg" alt="">
+            </div>
+            {% assign words = content | strip_html | number_of_words %}
+            {% if words < 360 %}
+              1 minute de lecture
+            {% else %}
+              {{ words | divided_by:200 }} minutes de lecture
+            {% endif %}
+          </div>
+              
+          <!--<div class="post-card__meta">
+            <div class="post-card__tag">
+              <img src="{{ site.baseurl }}/img/icons/comments.svg" alt="">
+            </div>
+            <span class="disqus-comment-count" data-disqus-url="http://toddmotto.com{{ page.url }}"></span>
+          </div>-->
+        </div>
+      </h1>
+      <div class="post__meta__divider"></div>
+    </header>
+      {{ content }}
     </div>
-  {% endfor %}
-  {% endif %}
-  
-  
-{% endfor %}
+
+    <div class="post__sidebar">
+      
+    </div>
+
+  </section>
+</article>

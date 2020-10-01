@@ -160,11 +160,7 @@ gulp.task('build', function(cb) {
               cb);
 });
 
-gulp.task('build:jekyll:watch',gulp.series( ['build:jekyll']), function(cb) {
-  //browserSync.reload();
-  cb();
-});
-gulp.task('build:scripts:watch', gulp.series(['build:scripts']), function(cb) {
+gulp.task('build:watch',gulp.series( ['build']), function(cb) {
   //browserSync.reload();
   cb();
 });
@@ -187,29 +183,29 @@ gulp.task('serve', function(cb) {
   });
 
   // Watch site settings
-  gulp.watch(['_config.yml', '!_site/**/*.*'], gulp.series(['build:jekyll:watch']));
+  gulp.watch(['_config.yml', '!_site/**/*.*'], gulp.series(['build:watch']));
 
   // Watch app .scss files, changes are piped to browserSync
-  gulp.watch(['_sass/**/*.scss','!_site/**/*.*'], gulp.series(['build:styles']));
+  gulp.watch(['_sass/**/*.scss','!_site/**/*.*'], gulp.series(['build:watch']));
 
   // Watch app .js files
-  gulp.watch(['_scripts/**/*.js', '!_site/**/*.*'], gulp.series(['build:scripts:watch']));
+  gulp.watch(['_scripts/**/*.js', '!_site/**/*.*'], gulp.series(['build:watch']));
 
   // Watch Jekyll posts
-  gulp.watch(['_posts/**/*.+(md|markdown|MD)', '!_site/**/*.*'], gulp.series(['build:jekyll:watch']));
+  gulp.watch(['_posts/**/*.+(md|markdown|MD)', '!_site/**/*.*'], gulp.series(['build:watch']));
 
   // Watch Jekyll drafts if --drafts flag was passed
   
-  gulp.watch(['_drafts/*.+(md|markdown|MD)','!_site/**/*.*'], gulp.series(['build:jekyll:watch']));
+  gulp.watch(['_drafts/*.+(md|markdown|MD)','!_site/**/*.*'], gulp.series(['build:watch']));
   
 
   // Watch Jekyll html files
-  gulp.watch(['**/*.html', '!_site/**/*.*'], gulp.series(['build:jekyll:watch']));
+  gulp.watch(['**/*.html', '!_site/**/*.*'], gulp.series(['build:watch']));
   
-  gulp.watch(['./**/*.+(md|markdown|MD)','!_site/**/*.*'], gulp.series(['build:jekyll:watch']));
+  gulp.watch(['./**/*.+(md|markdown|MD)','!_site/**/*.*'], gulp.series(['build:watch']));
 
   // Watch Jekyll data files
-  gulp.watch(['_data/**.*+(yml|yaml|csv|json)', '!_site/**/*.*'], gulp.series(['build:jekyll:watch']));
+  gulp.watch(['_data/**.*+(yml|yaml|csv|json)', '!_site/**/*.*'], gulp.series(['build:watch']));
   cb();
 });
 

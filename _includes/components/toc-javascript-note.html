@@ -1,10 +1,12 @@
-<ul>
-  <li>Javascript
-    <ul>
-      <li>Intro 1</li>
-      <li>Intro 2</li>
-    </ul>
-  </li>
-
-
-</ul>
+{% for collection in site.collections %}
+  {% if collection.label == page.collection %}
+  
+    {% for section in collection.docs  %}
+    <div class="section">
+      <ul><li><a href="{{ section.url }}">{{ section.title }}</a></li></ul>
+    </div>
+  {% endfor %}
+  {% endif %}
+  
+  
+{% endfor %}

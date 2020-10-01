@@ -73,12 +73,12 @@
  */
 .nav {
   font-family: 'tt-medium';
+  color: #fff;
   &__external {
-    position: absolute;
-    top: 15px;
-    right: 10px;
-    width: 15px;
-    opacity: .2;
+    width: 250px;
+    opacity: 1;
+    background: $couleur-foncee;
+    padding: 5px;
   }
   &__link {
     position: relative;
@@ -349,6 +349,9 @@
   border-bottom: 1px solid darken(#f7f8fb, 5%);
   padding: 55px 50px;
   margin: 0;
+  @media screen and (max-width: 850px) {
+    display: none;
+  }
   &__title {
     display: flex;
     align-items: center;

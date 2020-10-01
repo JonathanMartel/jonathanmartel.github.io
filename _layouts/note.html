@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  {% include notes/head.html %}
+  <body>
+    {% include notes/header.html %}
+    <main class="content">
+      <div class="card">
+       
+        <div class="card__content">
+          {{ content }}
+        </div>
+        <nav class="nav nav__external">
+          {% if page.toc %}
+          <span class="gamma">Table des matières</span>
+            {% include components/toc-{{ page.toc}}.html %}
+          </span>
+          {% endif %}
+          <!--<a href="/" class="nav__link{% if page.url == '/' %} nav__link--active{% endif %}">
+            <img src="{{ site.baseurl }}/img/nav/blog.svg" alt="">
+            Articles
+          </a>-->
+          <!--<a href="/apropos" class="nav__link{% if page.url == '/apropos' %} nav__link--active{% endif %}">
+            <img src="{{ site.baseurl }}/img/nav/about.svg" alt="">
+            À propos
+          </a>-->
+          <!--<a href="/speaking" class="nav__link{% if page.url == '/speaking' %} nav__link--active{% endif %}">
+            <img src="{{ site.baseurl }}/img/nav/speaking.svg" alt="">
+            Speaking events
+          </a>-->
+          <!--<a href="//ultimateangular.com/courses/" target="_blank" class="nav__link{% if page.url == '/courses' %} nav__link--active{% endif %}">
+            <img src="{{ site.baseurl }}/img/nav/video.svg" alt="">
+            <img src="{{ site.baseurl }}/img/nav/external.svg" alt="" class="nav__external">
+            Online courses
+          </a>-->
+        </nav>
+      </div>
+      {% include footer.html %}
+    </main>
+  </body>
+</html>

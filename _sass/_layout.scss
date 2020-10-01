@@ -15,7 +15,7 @@ main {
 }
 
 body {
-  margin: 70px 0 0 250px;
+  margin: 0px 0 0 0px;
   @media screen and (max-width: 850px) {
     margin: 0;
   }
@@ -168,12 +168,14 @@ a:hover {
 .card {
   margin: 0 auto;
   background: #fff;
+  display: flex;
+  width: 100%;
 }
 .card__content {
-  margin: 0px 0 0;
-  position: relative;
-  z-index: 9998;
+  margin: 0px 0px 0px 0px;
   background: #fff;
+  width: 100%;
+  overflow-x: hidden;
   @media screen and (max-width: 850px) {
     margin: 0;
   }
