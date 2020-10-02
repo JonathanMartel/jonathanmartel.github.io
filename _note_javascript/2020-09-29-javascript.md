@@ -138,6 +138,7 @@ Liste des types de conversion automatique
 Référence : Table 3-2 (Flanagan, 2011, p. 46)
 
 ## Les opérateurs
+
 ### Opérateurs arithmétiques, incrémentation et décrémentation
 ```js
 +       // Addition
