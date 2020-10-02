@@ -170,6 +170,10 @@ h5, .epsilon {
 h6, .zeta {
   font-size: 16px; }
 
+h1 + h2,
+h2 + h3 {
+  margin-top: 16px; }
+
 p {
   margin-top: 24px;
   margin-bottom: 24px; }
@@ -1051,15 +1055,6 @@ div.page__content .speaking__list ul {
     @media screen and (max-width: 500px) {
       .post.single pre {
         margin: 32px -24px; } }
-  .post.single h2,
-  .post.single h3 {
-    padding-top: 47px;
-    margin-bottom: 40px; }
-  .post.single h2,
-  .post.single h3,
-  .post.single h4 {
-    padding-top: 100px;
-    margin-top: -85px; }
   .post.single ul {
     margin: 0 0 0 20px;
     padding: 0;
