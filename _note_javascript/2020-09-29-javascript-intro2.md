@@ -4,7 +4,7 @@ permalink: /note-de-cours/js-note-de-cours-intro-2
 title: "Note de cours - 2"
 path: 2020-09-29-javascript-intro2.md
 tag: js
-status: publish
+status: draft
 has_children: false
 parent: 2020-09-29-javascript.md
 order: 1.2

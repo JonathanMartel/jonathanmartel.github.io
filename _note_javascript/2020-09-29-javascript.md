@@ -1,7 +1,7 @@
 ---
 layout: note_cours
 permalink: /note-de-cours/js-note-de-cours
-title: "Introduction au Javascript (ECMAScript)"
+title: "Introduction au Javascript"
 path: 2020-09-29-javascript.md
 tag: js
 status: publish
@@ -20,6 +20,14 @@ Le JavaScript fut créé par Netscape et enregistré par Sun Microsystem. Sa ver
 Les navigateurs intègrent maintenant en continue les développements de JavaScript et on ne peut plus spécifiquement identifier une version numérique.
 
 L'API (*Application programming interface* ou interface de programmation) de JavaScript inclus diverses fonctions pour travailler avec des chaînes de caractères, des tableaux, des dates et des expressions régulières. Contrairement à d'autres langages de programmation, son API n'inclut pas de fonction d'entrée et de sortie. Ces fonctions sont définies par l'environnement d'interprétation dans lequel JavaScript est intégré[^1].
+
+<div class="toc" markdown="1">
+<span class="gamma">Table des matières</span>
+{:.no_toc}
+* TOC
+{:toc}
+</div>
+
 
 # Syntaxe de base
 ## Les commentaires
@@ -60,9 +68,12 @@ Le type booléen défini uniquement deux valeurs : `true` ou `false`. Toute aut
 suivantes sont toujours converties en valeur `false` : `undefined`, `null`, `0`, `-0`, `NaN`, `""`
 
 ### Chaine de caractère (*string*)
-La chaine de caractère est une série ordonnée de valeur de 16 bits qui représente un caractère Unicode. Elle possède une longueur qui est défini par le nombre de valeur de 16 bits qu'elle contient. Une chaine de caractère de taille 0 est vide. La chaine de caractère débute et termine avec un guillemet double `"` ou un guillemet simple `'`. Une chaine débutant par un guillemet double doit se terminer par un guillemet double. Celle-ci peut alors inclure le guillemet simple comme caractère[^2]. L'inverse est aussi vrai. On utilisera donc le guillemet double lorsqu'une chaine contient une apostrophe ou bien un guillemet simple quand elle contient un guillemet double. 
+La chaine de caractère est une série ordonnée de valeur de 16 bits qui représente un caractère Unicode. Elle possède une longueur qui est défini par le nombre de valeur de 16 bits qu'elle contient. Une chaine de caractère de taille 0 est vide. La chaine de caractère débute et termine avec un guillemet double `"` ou un guillemet simple `'`. Une chaine débutant par un guillemet double doit se terminer par un guillemet double. Celle-ci peut alors inclure le guillemet simple comme caractère. L'inverse est aussi vrai. On utilisera donc le guillemet double lorsqu'une chaine contient une apostrophe ou bien un guillemet simple quand elle contient un guillemet double. 
 
 Si une chaine contient les deux caractères, il faut utiliser le caractère d'échappement `\` avant le caractère à échapper. L'apostrophe sera donc représenté par `\'` et le guillemet double par `\"`.
+
+> Il est aussi possible d'utiliser les littéraux de gabarit (aussi nommé littéraux de chaines) afin de définir des chaines de caractères. On définira le début et la fin de la chaine avec un accent grave ou *back tick* `` ` `` . Leur avantage est qu'elles permettent de définir des chaines multiligne et d'utiliser des fonctions d'interpolation à l'intérieur de celle-ci sans utiliser la concaténation des chaines (voir [Chaine de caractère](js-note-de-cours-chaines) pour plus de détails)
+
 Exemples :
 
 ```js
@@ -236,8 +247,9 @@ switch(valeur) {
 ```
 
 Exemple  (ouvrez la console pour voir les sorties) :
-<script async src="//jsfiddle.net/JonathanMartel/0dutgh5z/4/embed/html,js,result/dark/"></script>
+<!--<script async src="//jsfiddle.net/JonathanMartel/0dutgh5z/4/embed/html,js,result/dark/"></script>-->
 
+<iframe width="100%" height="300" src="//jsfiddle.net/JonathanMartel/0dutgh5z/7/embedded/js,result/dark/" frameborder="0"></iframe>
 ### Boucle tant que ou boucle indéfinie (while)
 La boucle tant que permet d'exécuté des instructions tant qu'une condition est respectée. Les instructions ne sont exécutées que si la condition est vraie. Cette boucle est aussi appelée boucle indéfinie puisqu'elle peut être exécutée un nombre indéfini de fois. Lorsque l'on connait le nombre d'itération de la boucle, mieux vaut utiliser un type de boucle défini comme le compteur (for). Attention : Bien s'assurer que la condition deviendra fausse durant la boucle afin d'éviter les boucles infinies qui feront invariablement planter l'interpréteur.
 
@@ -270,7 +282,8 @@ for(initialisation; condition ; incrémentation) {
 ```
 
 Exemple (ouvrez la console pour voir les sorties) :
-<script async src="//jsfiddle.net/JonathanMartel/026sb4y9/embed/js/dark/"></script>
+<!--<script async src="//jsfiddle.net/JonathanMartel/026sb4y9/embed/js/dark/"></script>-->
+<iframe width="100%" height="300" src="//jsfiddle.net/JonathanMartel/026sb4y9/4/embedded/js,result/dark" frameborder="0"></iframe>
 
 Les valeurs d'initialisation, la condition et l'incrémentation sont optionnelles. Si la condition est absente, il faut prévoir une instruction `break` pour quitter la boucle.
 
@@ -285,7 +298,22 @@ for(propriété/index in *objet/tableau*) {
 ```
 
 Exemple (ouvrez la console pour voir les sorties) :
-<script async src="//jsfiddle.net/JonathanMartel/wva9cuq5/embed/js/dark/"></script>
-  
+<!--<script async src="//jsfiddle.net/JonathanMartel/wva9cuq5/embed/js/dark/"></script>-->
+<iframe width="100%" height="300" src="//jsfiddle.net/JonathanMartel/wva9cuq5/1/embedded/js,result/dark" frameborder="0"></iframe>  
 
-### Sources : 
+# Sources additionnelles
+* [Instructions \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions)
+* [if...else \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/if...else)
+* [switch \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/switch)
+* [var \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/var)
+* [let \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/let)
+* [fonction \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/function)
+* [for \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/for)
+* [while \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/while)
+* [do...shile \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/do...while)
+* [for...in \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/for...in)
+* [Opérateurs \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/Opérateurs)
+* [Objets globaux \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/Objects_globaux)
+
+
+
