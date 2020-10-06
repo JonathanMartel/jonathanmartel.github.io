@@ -167,6 +167,64 @@ unTableau.splice(3, 1, 55, 44, 33);
 console.log(unTableau)    //=> [66, 88, 77, 55, 44, 33]
 ```
 
+## Parcourir un tableau
+La plupart du temps, le traitement d'un tableau demande qu'on le parcours en entier afin d'y trouver la valeur requise ou bien d'effectuer une opération sur l'ensemble des valeurs. De manière traditionnel en JavaScript, nous utilisons la boucle itérative `for()` pour parcourir un tableau.
+
+Exemple : 
+```js
+let unTableau = [1,2,3,4,5];
+for(let i=0; i<unTableau.length ; i++)
+{
+    unTableau[i] = unTableau[i]*2;      // Double la valeur
+}
+console.log(unTableau);         // [2,4,6,8,10]
+```
+Il est aussi possible d'appliquer un traitement qui modifie ou extrait des éléments d'un tableau. Dans ce cas, il faudra être attentif à la manière de traiter le tableau. Par exemple, si nous voulons retirer toutes les valeurs impaires d'un tableau en utilisant `splice()` vaut mieux parcourir le tableau à partir de la fin. 
+
+Exemple (mauvais): 
+```js
+let unTableau = [1,1,2,2,3, 3, 3, 4];
+for(let i=0; i<unTableau.length ; i++)
+{
+    if(unTableau[i]%2 == 1){
+        unTableau.splice(i, 1); 
+    }
+}
+console.log(unTableau);         // [1, 2, 2, 3, 4]
+```
+> En parcourant le tableau de 0 à length et en effaçant la valeur impaire, `splice()` décale les autres valeurs. i pointe donc sur la nouvelle valeur qui vient d'être décalé. Pour ne pas subir les effets de décalage des valeurs, il faut parcourir le tableau de la fin vers le début.
+
+Exemple (bon): 
+```js
+let unTableau = [1, 1, 2, 2, 3, 3, 3, 4];
+for(let i=unTableau.length-1; i>=0; i--)    // De length-1 à 0
+{
+    if(unTableau[i]%2 == 1){
+        unTableau.splice(i, 1); 
+    }
+}
+console.log(unTableau);         // [2, 2, 4]
+```
+
+Il est aussi possible de créer un second tableau qui contiendra les valeurs requises pour éviter les problèmes de manipulation des indexes.
+Exemple: 
+```js
+let unTableau = [1, 1, 2, 2, 3, 3, 3, 4];
+let aPairs=  [];
+for(let i=0; i<unTableau.length ; i++)
+{
+    if(unTableau[i]%2 == 0){
+        aPairs.push(unTableau[i])
+    }
+}
+console.log(aPairs);         // [2, 2, 4]
+```
+
+Il est aussi possible d'utiliser la programmation fonctionnelle pour effectuer ce même type de traitement, mais ça déborde la portée de ce chapitre (voir [Programmation avancés](#))
+
+## trier un tableau
+
+
 ## Simuler des tableaux à plusieurs dimensions
 
 Si d'autres langages de programmation définissent des tableaux à plusieurs dimensions (c, c++), en JavaScript on ne peut définir directement ce type de tableau. Mais puisqu'un tableau peut en contenir d'autres, on pourra définir ce type de tableau de la manière suivante.
@@ -282,19 +340,6 @@ Exemple :
 
 # Stratégies et astuces de travail avec les tableaux
 
-## Fouiller un tableau
-```js
-for(let i=0; i<divers.length ; i++)
-{
-​	//console.log(divers[i]);
-
-}
-```
-
-## Trouver le dernier item
-```js
-monTableau[monTableau.length-1];
-```
 
 
 # Exercices sur les tableaux
