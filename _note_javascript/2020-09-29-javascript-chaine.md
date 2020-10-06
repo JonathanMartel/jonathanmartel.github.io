@@ -100,14 +100,8 @@ console.log(valeur);       // Résultat attendu 11, résultat obtenu 11.
 `chaine.charAt(n)`
 > Retourne le caractère qui occupe la position n
 
-`chaine.charCodeAt (n)`
-> Retourne l'encodage Unicode du caractère qui occupe la position n
-
 `chaine.concat(valeur, ...)`
 > Retourne la chaine de caractère composée de chaine et des valeurs du paramètre
-
-`Static String.fromCharCode(valeur, ...)`
-> Retourne la chaine de caractère composée des valeurs Unicode passées en paramètre.
 
 `chaine.indexof(sous-chaine, [index])`
 > Retourne l'index de la première occurrence de la sous-chaine trouvée à partir de l'index (optionnel)
@@ -123,8 +117,8 @@ console.log(valeur);       // Résultat attendu 11, résultat obtenu 11.
 
 `chaine.split(delimiteur, [limite])`
 > Retourne un tableau de chaines de caractères créé en divisant chaine selon le delimiteur. Le paramètre limite permet de définir le maximum d'éléments retournés dans le tableau.
-> Exemple :
-> `"1:2:3:4".split(":"); //=> ["1","2","3","4"]`
+Exemple :
+`"1:2:3:4".split(":"); //=> ["1","2","3","4"]`
 
 `chaine.substring(debut, fin)`
 > Retourne une sous-chaine de caractères entre debut (inclut) et fin (exclut).
