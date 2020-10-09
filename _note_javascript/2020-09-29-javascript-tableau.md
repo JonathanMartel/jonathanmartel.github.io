@@ -222,7 +222,13 @@ console.log(aPairs);         // [2, 2, 4]
 
 Il est aussi possible d'utiliser la programmation fonctionnelle pour effectuer ce même type de traitement, mais ça déborde la portée de ce chapitre (voir [Programmation avancés](#))
 
-## trier un tableau
+## Trier un tableau
+Javascript intègre des fonctions pour réaliser des tris sur les valeurs des tableaux. La fonction `sort([fn])` permet d'effectuer un tri de base ou un tri avancé, selon le paramètre qui lui ait passé. 
+
+```js
+let unTableau = [1, 0, -2, 4, 1, 5, 99, -999];
+
+```
 
 
 ## Simuler des tableaux à plusieurs dimensions
