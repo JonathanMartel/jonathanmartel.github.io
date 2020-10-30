@@ -121,7 +121,7 @@ let livre = {
     auteur: "John Doe",
     avancePage: function () {
         if(this.pageActuelle < this.nombrePage) {
-            this.pageActuelle++;},
+            this.pageActuelle++;
         }
     },
     reculePage: function () {
@@ -133,7 +133,7 @@ let livre = {
 ```
 
 ### Les limites des objets littéraux
-Les objets littéraux sont très utiles afin de représenter et de manipuler des données rapidement et efficacement. Cependant, leur structure ne permet pas facilement leur reproduction (donc l'instanciation) de plusieurs copies. Dans l'exemple de l'objet "livre", il faudrait définir plusieurs fois les mêmes méthodes et les mêmes propriétés pour chacun des livres dans le programme. Cette structure est donc limitée.
+Les objets littéraux sont très utiles afin de représenter et de manipuler des données rapidement et efficacement. Cependant, leur structure ne permet pas facilement leur reproduction (donc l'instanciation) de plusieurs copies. Dans l'exemple de l'objet `livre`, il faudrait définir plusieurs fois les mêmes méthodes et les mêmes propriétés pour chacun des livres dans le programme. Cette structure est donc limitée.
 
 ## Définition simple par prototype
 La définition des objets par prototype permet de concevoir un modèle d'objet, le prototype, dont on peut créer des instances possédant les mêmes propriétés et méthodes. De plus, il est possible de définir un constructeur pour le prototype de l'objet. Le constructeur est une fonction qui est appelée automatiquement à la création d'une instance de l'objet et permet de fixer certaines valeurs initiales. Le constructeur, comme les autres méthodes, peut prendre plusieurs paramètres.
@@ -181,32 +181,32 @@ Exemple :
 ```js
 // Constructeur qui attend deux paramètres
 function Portee(nbDebut, nbFin) {
-    this.debut = nbDebut; // Propriété debut
-    this.fin = nbFin; // Propriété fin
+    this.debut = nbDebut;       // Propriété debut
+    this.fin = nbFin;           // Propriété fin
 }
 
 //Définition des méthodes du prototype de Portee2
-
-Portee.prototype.inclus = function (x) {//Méthode
+Portee.prototype.inclus = function (x) {    
     return this.debut <= x && x<= this.fin;
 };
+
 // Méthode toString retourne une chaine composé des valeurs du début et de fin
 Portee.prototype.toString = function() {
     return "De " + this.debut + " à " + this.fin;
 };
 
-let p1 = new Portee(10, 100); // Instanciation d'un objet Portee
-p1.inclus(58); // => true
-p1.inclus(5); // => false
-console.log(p1); // => "De 10 à 100";
-let p2 = new Portee(5, 50); // Instanciation d'un objet Portee
-p2.inclus(58); // => false
-p2.inclus(5); // => true
-console.log(p2); // => "De 5 à 50";
+let p1 = new Portee(10, 100);   // Instanciation d'un objet Portee
+p1.inclus(58);                  // => true
+p1.inclus(5);                   // => false
+console.log(p1);                // => "De 10 à 100";
+let p2 = new Portee(5, 50);     // Instanciation d'un objet Portee
+p2.inclus(58);                  // => false
+p2.inclus(5);                   // => true
+console.log(p2);                // => "De 5 à 50";
 ```
 
 ## Manipulation des objets
-Les objets ne se manipulent pas de la même manière que les autres types en JavaScript. Ceci s'applique particulièrement lorsque l'on veut copier ou comparer des objets entre eux. Les objets sont des types par dont la valeur est fixée par référence. La variable qui contient l'objet n'est pas l'objet lui-même, mais une référence à l'objet. Par ailleurs, cette propriété s'applique aussi aux tableaux qui ne peuvent être comparés directement, ni copiés.
+Certains objets ou certains types en JavaScript doivent être traités différemment en JavaScript. Ceci s'applique particulièrement lorsque l'on veut copier, passer en paramètre ou comparer des objets entre eux. Les objets littéraux ou avec un prototype sont des types dont la valeur est manipulée par référence et non par copie. La variable qui contient l'objet n'est pas l'objet lui-même, mais une référence à celui-ci. Ainsi donc, si un objet contenu dans la variable `a` est assigné à la variable `b`, les deux variables contiendront le même objet et non chacun une copie de l'objet. Par ailleurs, cette propriété s'applique aussi aux tableaux qui ne peuvent être comparés directement, ni copiés par affectation.
 
 ### Comparaison des objets
 Les objets ne sont pas comparables par valeurs. Même s'ils possèdent les mêmes propriétés avec les mêmes valeurs (incluant les méthodes), deux objets ne sont jamais identiques.
@@ -217,34 +217,34 @@ let o = {x:0, y:0};
 let p = {x:0, y:0};
 console.log(o == p); //=> false
 ```
-
 ### Copie des objets
-Puisque les objets sont définis par référence, leur copie se fait aussi par référence. Si l'opérateur d'assignation (=) procède normalement par copie lorsque l'on assigne une chaine de caractère ou une valeur numérique, lorsqu'il s'agit d'objet ce n'est pas aussi simple.
+Puisque les objets sont définis par référence, leur copie se fait aussi par référence. Si l'opérateur d'assignation (`=`) procède par copie lorsque l'on assigne une chaine de caractère ou une valeur numérique, lorsqu'il s'agit d'objet ce n'est pas aussi simple.
 
 Exemple :
 ```js
-let p = {x:1}; // Crée un objet avec une propriété x défini à 1
-let o = p; // Copie la référence de p dans o
-p.x = 2; // Modifie la propriété x dans l'objet p
-o.x; //=>2
+let p = {x:1};  // Crée un objet avec une propriété x défini à 1
+let o = p;      // Copie la référence de p dans o
+p.x = 2;        // Modifie la propriété x dans l'objet p
+o.x;            //=>2   La valeur de l'objet o est aussi modifié
 ```
+
 ### Vérifier l'existence d'une propriété
 Dans plusieurs cas, il peut être important de vérifier l'existence d'une propriété avant d'essayer de lire sa valeur. Pour ce faire, il faut utiliser l'opérateur in. Celui-ci retourne true si la propriété existe dans l'objet et false, si elle n'existe pas.
 
 Exemple :
 ```js
 let o = {x:0};
-"x" in o; //=> true
-"y" in o; //=> false
-"toString" in o; //=> true
+"x" in o;           //=> true
+"y" in o;           //=> false
+"toString" in o;    //=> true
 ```
-Il n'est toutefois pas toujours nécessaire d'utiliser cet opérateur pour vérifier l'existence d'une propriété. Il est possible de le faire en vérifiant que la propriété n'est pas undefined avec un opérateur de stricte différence (`!==`). Le seul cas où cela sera impossible est si une propriété est définie à undefined.
+Il n'est toutefois pas toujours nécessaire d'utiliser cet opérateur pour vérifier l'existence d'une propriété. Il est possible de le faire en vérifiant que la propriété n'est pas `undefined` avec un opérateur de stricte différence (`!==`). Le seul cas où cela sera impossible est si une propriété est définie à `undefined`.
 
 Exemple :
 ```js
 let o = {x:0, y:undefined};
-"x" !== undefined; //=> true
-"y" !== undefined; //=> false
+"x" !== undefined;          //=> true
+"y" !== undefined;          //=> false
 ```
 ## Le patron de conception Module
 Le JavaScript est un langage de programmation qui peut avoir de multiples facettes et de multiples structures. Il n'y a qu'à penser aux fonctions anonymes, aux objets littéraux ou à la syntaxe des librairies externes telles que jQuery pour voir la grande diversité et la complexité de ce langage. La section suivante présentera quelques éléments qui apparaissent comme des techniques avancées et permettent de passer à un autre niveau dans l'usage de JavaScript. L'objectif de cette section est d'explorer le patron de conception Module. Pour ce faire, il faut d'abord voir certains principes en JavaScript tels que les fermetures ou clôtures (*closures*) et les *Immediately Invoked Function Expression* (IIFE).
