@@ -2,7 +2,8 @@
   {% if collection.label == page.collection %}
   <div class="section"></div>
   <ul>
-    {% for section in collection.docs  %}
+    {% assign docs  = collection.docs | sort: "order" %}
+    {% for section in docs  %}
       {% if section.status == "publish" %}
         <li>
           <a href="{{ section.url }}" {% if section.url == page.url %}class="active"{% endif %}>
