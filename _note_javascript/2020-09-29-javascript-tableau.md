@@ -7,7 +7,7 @@ tag: js
 status: publish
 has_children: true
 toc: javascript-note
-order: 4
+order: 14
 collection: note_javascript
    
 ---

@@ -7,7 +7,7 @@ tag: js
 status: draft
 has_children: false
 parent: 2020-09-29-javascript.md
-order: 1.1
+order: 10
 toc: javascript-note
 ---
 
