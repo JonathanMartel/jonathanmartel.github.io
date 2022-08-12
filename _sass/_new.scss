@@ -75,7 +75,8 @@
   font-family: 'tt-medium';
   color: #fff;
   &__external {
-    width: 250px;
+    /*width: 250px;*/
+    width: 100vw;
     opacity: 1;
     background: $couleur-foncee;
     padding: 5px;
