@@ -5,9 +5,14 @@
     {% assign docs  = collection.docs | sort: "order" %}
     {% for section in docs  %}
       {% if section.status == "publish" %}
+      {% assign reste = section.order | modulo: 10 %}
         <li>
+          {% if reste != 0 %}
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          {% endif %}
           <a href="{{ section.url }}" {% if section.url == page.url %}class="active"{% endif %}>
-          {{section.title}}
+            {{section.title}}
+          </a>
         </li>
       {% endif%}
     {% endfor %}
