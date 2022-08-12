@@ -13,8 +13,7 @@ collection: note_javascript
    
 ---
 
-La programmation orientée objet est un paradigme de programmation qui a été défini au tournant des années 1960. On le distingue habituellement de la programmation procédurale, composée d'une longue liste d'instructions contenues dans diverses fonctions. Le modèle de la programmation orientée objet consiste à faire interagir ensemble des
-entités de codes, appelés objet, qui regroupe des données, mais aussi des opérations spécifiques à l'objet. Dans ce contexte, un objet représente une entité conceptuelle ou physique tel qu'un usager, un livre ou tout autre élément, selon le contexte du programme. La POO repose sur trois principes fondamentaux : l'encapsulation, l'héritage et le polymorphisme.
+La programmation orientée objet est un paradigme de programmation qui a été défini au tournant des années 1960. On le distingue habituellement de la programmation procédurale, composée d'une longue liste d'instructions contenues dans diverses fonctions. Le modèle de la programmation orientée objet consiste à faire interagir ensemble des entités de codes, appelés objet, qui regroupe des données, mais aussi des opérations spécifiques à l'objet. Dans ce contexte, un objet représente une entité conceptuelle ou physique tel qu'un usager, un livre ou tout autre élément, selon le contexte du programme. La POO repose sur trois principes fondamentaux : l'encapsulation, l'héritage et le polymorphisme.
 
 <div class="toc" markdown="1">
 <span class="gamma">Table des matières</span>
@@ -22,7 +21,7 @@ entités de codes, appelés objet, qui regroupe des données, mais aussi des op�
 * TOC
 {:toc}
 </div>
-# Introduction aux concepts principaux de la programmation orientée (POO)
+# Introduction aux concepts principaux de la programmation orientée objet (POO)
 Afin d'introduire la POO en Javascript, je vous propose de faire une détour par des concepts plus généraux qui s'applique de manière spécifique dans la majorité des langages de programmation orientés objets. 
 ## Trois principes fondamentaux en programmation orientée objet (général)
 Le premier principe de la POO est celui d'**encapsulation**. Contrairement aux langages procéduraux qui définissent des données (variables) et des procédures pour traiter ces données (fonction), l'encapsulation réfère au principe d'enfermer dans une même entité à la fois les données et les procédures de traitement. Ce qui permet de cacher tous les rouages internes du traitement des données, mais de laisser certaines données et procédures accessibles à l'extérieur de l'objet.
@@ -40,8 +39,8 @@ Une **méthode** est une fonction qui appartient à un objet. Les méthodes déc
 
 Une **propriété** est une variable qui appartient à un objet. Celle-ci contient habituellement des données qui permettent de gérer l'objet. Ces propriétés peuvent être publiques, donc disponibles directement aux autres objets, ou bien privées, réservées à l'usage unique de l'objet à laquelle elles appartiennent.
 
-## Le JavaScript comme langage de programmation orientée basé sur les prototypes
-Le JavaScript est un langage de programmation orientée basé sur les prototypes, un type de programmation orientée objet. La particularité de ce type est d'utiliser les instances d'objet comme modèle (prototype) afin d'instancier les autres objets du même type. Donc au lieu de définir des classes qui doivent être instancié, l'instance de l'objet devient lui-même le modèle qui permet sa reproduction. Ceci a pour conséquence de permettre, notamment, de redéfinir l'objet, donc le modèle, tout au long du déroulement du programme. Il est alors dit mutable tandis que la classe est statique. Un des revers de cette possibilité est la syntaxe particulière de ce type de langage. Les mécanismes d'héritage ou bien la définition du contrôle d'accès (privé vs public) devient plus difficile. 
+## Le JavaScript comme langage de programmation orientée prototype
+Le JavaScript est un langage de programmation orientée prototype, un type de programmation orientée objet. La particularité de ce type est d'utiliser les instances d'objet comme modèle (prototype) afin d'instancier les autres objets du même type. Donc au lieu de définir des classes qui doivent être instancié, l'instance de l'objet devient lui-même le modèle qui permet sa reproduction. Ceci a pour conséquence de permettre, notamment, de redéfinir l'objet, donc le modèle, tout au long du déroulement du programme. Il est alors dit mutable tandis que la classe est statique. Un des revers de cette possibilité est la syntaxe particulière de ce type de langage. Les mécanismes d'héritage ou bien la définition du contrôle d'accès (privé vs public) devient plus difficile. 
 > Bien qu'il soit possible de définir des classes en JavaScript, au sens strict, le langage demeure orienté prototype et la syntaxte des classes n'est qu'un "sucre syntaxique" qui rend l'écriture des objets plus facile ([voir section Définition des classes](#)). 
 
 # Définition des objets
