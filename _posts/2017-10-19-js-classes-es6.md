@@ -50,9 +50,9 @@ L'exemple suivant montre ce choix.
 ```js
 const MonObjet = (function(){
     //Propriété privée
-    let _privee1, 
+    let _privee1,
         _privee2;
-        
+
     // Méthodes privées
     function _MonObjet(){
     // Code du constructeur
@@ -72,11 +72,11 @@ const MonObjet = (function(){
 })();
 let monObjet1 = new MonObjet();
 let monObjet2 = new MonObjet();
-monObjet1.setVariable("test");  
-monObjet2.setVariable("test2");  
+monObjet1.setVariable("test");
+monObjet2.setVariable("test2");
 console.log(monObjet1.getPublic());     // "test"
 console.log(monObjet1.getPrivee());     // "test2" euh !?!
-console.log(monObjet2.getPublic());     // "test2" 
+console.log(monObjet2.getPublic());     // "test2"
 console.log(monObjet2.getPrivee());     // "test2"
 ```
 > Dans cet exemple monObjet1 et monObjet2 partage l'accès aux mêmes propriétés privée `_privee1` et `_privee2`. Les propriétés publiques sont distinctes, mais pas les propriétés privées sont communes. Elles ne sont définies qu'une seule fois lors de la création initiale de `MonObjet`.
