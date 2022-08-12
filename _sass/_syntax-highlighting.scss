@@ -29,7 +29,6 @@ pre,
   margin: 0;
 }
 
-
 pre code {
   padding: 24px 64px;
   display: block;
@@ -37,9 +36,18 @@ pre code {
   overflow-y: scroll;
   /*-webkit-overflow-scrolling: touch;*/
   @media screen and (max-width: 850px) {
-    padding: 40px 40px;
+    padding: 0px 40px;
   }
+  table.rouge-table {
+    margin-bottom: 0px;
+    @media screen and (max-width: 850px) {
+      margin: 0px 0px;
+    }
+  }
+  
 }
+
+
 .highlight {
   padding: 0;
   margin: 0;
