@@ -148,7 +148,7 @@ o.y; // => 15
 
 
 # Exercices sur les fonctions
-
+À venir (ou pas)
 
 
 # Sources additionnelles

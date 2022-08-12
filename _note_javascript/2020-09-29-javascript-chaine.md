@@ -89,7 +89,7 @@ console.log(valeur);       // Résultat attendu 11, résultat obtenu 11.
 ```
 
 
-
+<!--
 # Principales propriétés et méthodes
 
 ## Propriétés :
@@ -133,9 +133,9 @@ Exemple :
 > Retourne une copie de la chaine avec les espaces blancs initiaux et finaux retirés
 
 
-
+-->
 # Exercices sur les chaines
-
+À venir (ou pas)
 
 
 # Sources additionnelles

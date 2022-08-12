@@ -4,7 +4,7 @@ permalink: /note-de-cours/js-note-de-cours-dom
 title: "Le DOM"
 path: 2020-11-10-javascript-DOM.md
 tag: js
-status: publish
+status: draft
 has_children: true
 toc: javascript-note
 order: 15
@@ -215,7 +215,7 @@ l'attribut class d'un élément. Le DOM défini des méthodes spécifiques
 pour lire et modifier les classes des éléments (voir section
 Manipulation du CSS).
 
-Manipulation du contenu des objets de type Element
+# Manipulation du contenu des objets de type Element
 
 Le contenu des objets de type Element varie beaucoup d'un document à
 l'autre. On considèrera par contre qu'il peut être lu de 3 façons
@@ -229,27 +229,27 @@ des trois manières de voir le contenu d'un élément (ou bien un mélange
 des trois). Chaque manière utilise des méthodes et des propriétés
 distinctes.
 
-Comme une chaine HTML
+## Comme une chaine HTML
 
 Pour récupérer le contenu d'un objet Element, il faut utiliser la
 propriété innerHTML. Celle-ci contient la chaine HTML qui est dans
 l'élément trouvé.
 
-Comme une chaine texte
+## Comme une chaine texte
 
 La propriété textContent contient uniquement les éléments textes, vidés
 de leur balise HTML. Ainsi, la balise <p> de l'exemple utilisé en
 début de section retournera « Un paragraphe avec un élément en
 italique ». Donc la chaine sans les marqueurs HTML.
 
-Comme des noeuds
+## Comme des noeuds
 
 Cette manière, la plus complexe, permet d'aller chercher chaque
 fragment de texte comme noeud d'un élément HTML. Il faut alors utiliser
 les propriétés de l'objet Node (défini plus haut dans cette section)
 pour fouiller l'arbre des noeuds et extraire les noeuds de type texte.
 
-Création, insertion et effacement d'élément et de noeud
+#Création, insertion et effacement d'élément et de noeud
 
 S'il est possible d'altérer des éléments existants, il est aussi
 possible d'en ajouter dans l'arbre du DOM. Les objets de type Node,
@@ -301,7 +301,7 @@ Syntaxe :
 
 parentNode.replaceChild(document.createElement("p"), n);
 
-Traitement des formulaires
+# Traitement des formulaires
 
 Le JavaScript est indispensable pour le traitement des formulaires.
 Validation de données et création de formulaire dynamique sont au nombre
@@ -318,7 +318,7 @@ name qui n'est pas exclusif sur les éléments des formulaires et
 l'interactivité des éléments de liste et de choix (bouton radio, case à
 cocher, etc.).
 
-Accès aux éléments du <form>
+# Accès aux éléments du <form>
 
 Cet élément fut un des premiers éléments à pouvoir être programmé. Il
 existe donc des méthodes spécifiques d'accès qui ne sont pas défini

@@ -9,7 +9,7 @@
   src: url("../fonts/tt-medium-webfont.woff2") format("woff2"), url("../fonts/tt-medium-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal; }
- 
+
 #carbonads {
   border-radius: 4px;
   display: block;
@@ -1289,7 +1289,7 @@ pre code {
   display: block;
   color: #c4d1e1;
   overflow-y: scroll;
-  -webkit-overflow-scrolling: touch; }
+  /*-webkit-overflow-scrolling: touch;*/ }
   @media screen and (max-width: 850px) {
     pre code {
       padding: 40px 40px; } }
@@ -1444,7 +1444,8 @@ pre code {
   font-family: 'tt-medium';
   color: #fff; }
   .nav__external {
-    width: 250px;
+    /*width: 250px;*/
+    width: 100vw;
     opacity: 1;
     background: #604C8D;
     padding: 5px; }

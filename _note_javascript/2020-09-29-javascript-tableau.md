@@ -256,6 +256,7 @@ echec[7][7]; // => "T2B"
 ```
 > Notez que le tableau n'a pas besoin d'être carré ou même rectangulaire. Si dans l'exemple précédent le tableau possède le même nombre d'élément pour chaque index, il pourrait en être autrement en fonction de ses besoins.
 
+<!-- 
 # Principales propriétés et méthodes
 L'API de JavaScript défini plusieurs propriétés et méthodes qui peuvent être appelées sur les tableaux.
 
@@ -343,7 +344,7 @@ Exemple :
 
 `tableau.some(predicat, item)`
 > Retourne true, si au moins un élément du tableau qui est vrai selon le predicat et false, si aucuns éléments retournent faux. Le paramètre item contient l'objet tableau (this).
-
+-->
 # Stratégies et astuces de travail avec les tableaux
 
 
