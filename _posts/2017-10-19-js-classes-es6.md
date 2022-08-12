@@ -46,8 +46,8 @@ MonObjet.fctPublique1();
 Il y a plusieurs limites à ce type de structure, notamment, le manque de souplesse quant à la création d'instance de l'objet. Un espace de nom ne permet pas de créer des instances multiples. Pour régler ce problème, on peut retourner le constructeur d'un objet afin d'en créer des instances distinctes. 
 
 L'exemple suivant montre ce choix.
-```js
 
+```js
 var MonObjet = (function(){
     //Propriété privée
     var _privee1, 
@@ -85,7 +85,6 @@ console.log(monObjet2.getPrivee());     // "test2"
 Pour corriger ce problème, il faut plutôt utiliser un patron de type Factory. Il s'agira d'une fonction de construction d'une instance d'objet. Au lieu d'utiliser une IIFE, on appelera explicitement le factory qui retournera l'objet. Dans ce cas, chaque instance à accès à ses propres propriétés (publiques comme privées). L'inconvénient est qu'il n'y a plus le mot `new` pour clarifier la syntaxe.
 
 ```js
-
 var MonFactoryObjet = function(){
     //Propriété privée
     var _privee1, 
