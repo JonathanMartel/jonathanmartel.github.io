@@ -24,9 +24,9 @@ Auparavant, une des manières très populaire de créer un objet en Javascript e
 En voici un exemple simple.
 
 ```js
-var MonObjet = (function(){
+const MonObjet = (function(){
     //Propriété privée
-    var _privee1, 
+    let _privee1, 
         _privee2;
     // Méthodes privées
     function _fctPrivee(){
@@ -48,9 +48,9 @@ Il y a plusieurs limites à ce type de structure, notamment, le manque de souple
 L'exemple suivant montre ce choix.
 
 ```js
-var MonObjet = (function(){
+const MonObjet = (function(){
     //Propriété privée
-    var _privee1, 
+    let _privee1, 
         _privee2;
         
     // Méthodes privées
@@ -70,24 +70,23 @@ var MonObjet = (function(){
     _MonObjet.prototype.getPrivee = function(){return _privee1}
     return _MonObjet;
 })();
-var monObjet1 = new MonObjet();
-var monObjet2 = new MonObjet();
+let monObjet1 = new MonObjet();
+let monObjet2 = new MonObjet();
 monObjet1.setVariable("test");  
 monObjet2.setVariable("test2");  
 console.log(monObjet1.getPublic());     // "test"
 console.log(monObjet1.getPrivee());     // "test2" euh !?!
 console.log(monObjet2.getPublic());     // "test2" 
 console.log(monObjet2.getPrivee());     // "test2"
-
 ```
 > Dans cet exemple monObjet1 et monObjet2 partage l'accès aux mêmes propriétés privée `_privee1` et `_privee2`. Les propriétés publiques sont distinctes, mais pas les propriétés privées sont communes. Elles ne sont définies qu'une seule fois lors de la création initiale de `MonObjet`.
 
 Pour corriger ce problème, il faut plutôt utiliser un patron de type Factory. Il s'agira d'une fonction de construction d'une instance d'objet. Au lieu d'utiliser une IIFE, on appelera explicitement le factory qui retournera l'objet. Dans ce cas, chaque instance à accès à ses propres propriétés (publiques comme privées). L'inconvénient est qu'il n'y a plus le mot `new` pour clarifier la syntaxe.
 
 ```js
-var MonFactoryObjet = function(){
+const MonFactoryObjet = function(){
     //Propriété privée
-    var _privee1, 
+    let _privee1, 
         _privee2;
     // Méthodes privées
     var _MonObjet = {
@@ -105,8 +104,8 @@ var MonFactoryObjet = function(){
     _MonObjet.getPrivee = function(){return _privee1}
     return _MonObjet;
 }
-var monObjet1 = MonFactoryObjet();
-var monObjet2 = MonFactoryObjet();
+let monObjet1 = MonFactoryObjet();
+let monObjet2 = MonFactoryObjet();
 
 monObjet1.setVariable("test");  
 monObjet2.setVariable("test2");  
