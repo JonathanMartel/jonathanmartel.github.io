@@ -122,7 +122,7 @@ De prime abord le patron factory règle les problèmes et permet d'utiliser des 
 ### Les classes ES6
 Les classes ECMASScript 2015 sont un ajout syntaxique afin de clarifier l'écriture des objets en JavaScript. Elle n'introduit pas de changement majeur à l'héritage prototypal. 
 
-Elle se déclare d'une matière simple et sans ambiguité
+Elle se déclare d'une matière simple et sans ambiguité.
 ```js
 class MonObjet{
     constructor(param){
