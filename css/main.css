@@ -1289,6 +1289,7 @@ pre code {
   display: block;
   color: #c4d1e1;
   overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
   /*-webkit-overflow-scrolling: touch;*/ }
   @media screen and (max-width: 850px) {
     pre code {
