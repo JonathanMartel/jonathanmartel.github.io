@@ -2,13 +2,12 @@
 layout: note_cours
 permalink: /note-de-cours/js-note-de-cours-poo
 title: "La POO : les bases"
-path: 2020-10-29-javascript-poo.md
+path: javascript-poo-intro.md
+date: "2022-08-16"
 tag: js
 status: publish
-has_children: true
 toc: javascript-note
-order: 20
-subpage: 0
+order: 30
 collection: note_javascript
    
 ---
@@ -21,7 +20,9 @@ La programmation orientée objet est un paradigme de programmation qui a été d
 * TOC
 {:toc}
 </div>
+
 # Introduction aux concepts principaux de la programmation orientée objet (POO)
+
 Afin d'introduire la POO en Javascript, je vous propose de faire une détour par des concepts plus généraux qui s'applique de manière spécifique dans la majorité des langages de programmation orientés objets. 
 ## Trois principes fondamentaux en programmation orientée objet (général)
 Le premier principe de la POO est celui d'**encapsulation**. Contrairement aux langages procéduraux qui définissent des données (variables) et des procédures pour traiter ces données (fonction), l'encapsulation réfère au principe d'enfermer dans une même entité à la fois les données et les procédures de traitement. Ce qui permet de cacher tous les rouages internes du traitement des données, mais de laisser certaines données et procédures accessibles à l'extérieur de l'objet.
@@ -110,7 +111,7 @@ let nomObjet = {
 ```
 Tout comme pour une fonction (anonyme ou non), la méthode peut avoir des paramètres et retourner une valeur.
 
-### L'accès à soi-même, le mot-clé `this`
+### L'accès à soi-même, le mot-clé *this*
 Une méthode se définie comme une fonction qui produit une action sur son objet. La méthode doit donc posséder une manière pour référer à son objet et aux diverses propriétés de celui-ci. Le mot-clé `this` permet spécifiquement d'accéder à l'objet sur lequel s'applique la méthode. L'exemple suivant montre comment une méthode peut accéder et modifier les propriétés de son objet.
 
 Exemple :
@@ -247,7 +248,7 @@ let o = {x:0, y:undefined};
 "y" !== undefined;          //=> false
 ```
 
-## Définition d'un objet avec le mot-clé class
+## Définition d'un objet avec le mot-clé *class*
 Si Javascript demeure une langage de programmation objet par protoype, la syntaxe moderne du langage admet une écriture des objets sous forme de classe. Dans les faits, il s'agit d'un sucre syntaxique qui produit la même chose qu'un prototype, mais qui rend la syntaxe plutôt similaire à ceux des autres langages de programmation orientée objet. 
 
 ### Définition d'une classe et de son constructeur
@@ -287,106 +288,6 @@ class NomObjet  {
 };
 ```
 
-### Instanciation d'un objet
-Une fois le prototype de l'objet complété, il est possible de créer une instance de l'objet. Chaque instance sera indépendante et conservera ses propres valeurs.
-
-Exemple :
-```js
-// Constructeur qui attend deux paramètres
-function Portee(nbDebut, nbFin) {
-    this.debut = nbDebut;       // Propriété debut
-    this.fin = nbFin;           // Propriété fin
-}
-
-//Définition des méthodes du prototype de Portee2
-Portee.prototype.inclus = function (x) {    
-    return this.debut <= x && x<= this.fin;
-};
-
-// Méthode toString retourne une chaine composé des valeurs du début et de fin
-Portee.prototype.toString = function() {
-    return "De " + this.debut + " à " + this.fin;
-};
-
-let p1 = new Portee(10, 100);   // Instanciation d'un objet Portee
-p1.inclus(58);                  // => true
-p1.inclus(5);                   // => false
-console.log(p1);                // => "De 10 à 100";
-let p2 = new Portee(5, 50);     // Instanciation d'un objet Portee
-p2.inclus(58);                  // => false
-p2.inclus(5);                   // => true
-console.log(p2);                // => "De 5 à 50";
-```
-
-
-La définition des objets par prototype permet de concevoir un modèle d'objet, le prototype, dont on peut créer des instances possédant les mêmes propriétés et méthodes. De plus, il est possible de définir un constructeur pour le prototype de l'objet. Le constructeur est une fonction qui est appelée automatiquement à la création d'une instance de l'objet et permet de fixer certaines valeurs initiales. Le constructeur, comme les autres méthodes, peut prendre plusieurs paramètres.
-
-### Définition de l'objet avec son constructeur
-Dans un premier temps, il faut définir un constructeur pour l'objet que l'on veut créer. Ce constructeur doit être une fonction. Cette fonction peut être vide ou non et recevoir des paramètres. Le nom de la fonction "constructeur" deviendra le nom du modèle d'objet.
-
-Syntaxe :
-```js
-function NomObjet([param]) {
-
-}
-```
-
-### Définition des méthodes
-Une fois le constructeur défini, il est possible de définir les méthodes de l'objet. Les fonctions qui serviront de méthodes seront affectées à des propriétés de l'objet prototype. Pour ce faire, il existe 2 syntaxes. La première redéfinie l'ensemble des propriétés de l'objet prototype et la seconde ajoute les nouvelles méthodes sans affecter les autres méthodes précédemment définies.
-
-Syntaxe 1 :
-```js
-// Prototype de l'objet Portee
-NomObjet.prototype = {
-    methode1: function () { // Méthode
-        // Instruction
-    }, 
-    methode2: function () { // Méthode
-        // Instruction
-    }
-};
-```
-Syntaxe 2 :
-```js
-// Prototype de l'objet Portee
-NomObjet.prototype.methode1 = function () {// Méthode
-    // Instructions
-};
-
-NomObjet.prototype.methode2 = function () {// Méthode
-    // Instructions
-};
-```
-### Instanciation d'un objet
-Une fois le prototype de l'objet complété, il est possible de créer une instance de l'objet. Chaque instance sera indépendante et conservera ses propres valeurs.
-
-Exemple :
-```js
-// Constructeur qui attend deux paramètres
-function Portee(nbDebut, nbFin) {
-    this.debut = nbDebut;       // Propriété debut
-    this.fin = nbFin;           // Propriété fin
-}
-
-//Définition des méthodes du prototype de Portee2
-Portee.prototype.inclus = function (x) {    
-    return this.debut <= x && x<= this.fin;
-};
-
-// Méthode toString retourne une chaine composé des valeurs du début et de fin
-Portee.prototype.toString = function() {
-    return "De " + this.debut + " à " + this.fin;
-};
-
-let p1 = new Portee(10, 100);   // Instanciation d'un objet Portee
-p1.inclus(58);                  // => true
-p1.inclus(5);                   // => false
-console.log(p1);                // => "De 10 à 100";
-let p2 = new Portee(5, 50);     // Instanciation d'un objet Portee
-p2.inclus(58);                  // => false
-p2.inclus(5);                   // => true
-console.log(p2);                // => "De 5 à 50";
-```
 
 
 

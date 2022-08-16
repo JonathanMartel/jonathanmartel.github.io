@@ -1031,6 +1031,8 @@ div.page__content .speaking__list ul {
     .post.single blockquote code {
       color: #6947a0;
       background: #ede5fb; }
+    .post.single blockquote blockquote {
+      padding: 0px 80px; }
     .post.single blockquote p {
       color: #6947a0;
       margin: 0;
@@ -1289,7 +1291,7 @@ pre code {
   display: block;
   color: #c4d1e1;
   overflow-y: scroll;
-  -webkit-text-size-adjust: 100%;
+  -webkit-text-size-adjust: none;
   /*-webkit-overflow-scrolling: touch;*/ }
   @media screen and (max-width: 850px) {
     pre code {

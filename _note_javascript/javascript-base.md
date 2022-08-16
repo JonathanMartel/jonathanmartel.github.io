@@ -2,7 +2,8 @@
 layout: note_cours
 permalink: /note-de-cours/js-note-de-cours
 title: "Introduction au Javascript"
-path: 2020-09-29-javascript.md
+path: javascript-base.md
+date: "2022-08-11"
 tag: js
 status: publish
 has_children: true
@@ -53,9 +54,21 @@ Il n'existe pas vraiment de standard dans la documentation en JavaScript. Contra
 ## Les variables
 Les variables sont des entités abstraites qui permettent d'enregistrer des valeurs dans un programme. La particularité de ces éléments est qu'en plus de contenir des valeurs sur lequel nous pouvons faire des opérations, qu'il est possible de modifier leur valeur dynamiquement, selon le déroulement du programme. 
 
+### Déclaration de variables
+La déclaration de variable en JavaScript est peut être effectué à l'aide de trois mots-clés distincts : `let`, `const` et `var`. Le dernier, bien qu'encore fréquemment vu dans du code, est un vestige et ne devrait pas être utilisé. `const` sert à définir une constante (une variable constante...), c'est-à-dire une variable en lecture seule qui ne pourra pas être réassignée, mais dont le contenu n'est pas immuable. `let` doit être utilisé dans tous les autres cas et défini une variable qui peut être réaffectée ou bien modifiée.
+```js
+const constTableau = [];
+constTableau.push(1)        // Ajout d'une valeur au tableau fonctionne (non réassignable, mais mutable) => [1]
+constTableau = [3];         // Retourne une erreur (TypeError) puisque tableau est réassigné
+
+let letTableau = [];
+constTableau.push(1)        // Ajout d'une valeur => [1]
+letTableau = [3];           // Assignation d'un nouveau tableau dans la variable letTableau => [3]
+```
+
 ### Nomenclature et mot réservé
 Les variables doivent débuter par une lettre (a-zA-Z), le symbole $ ou une barre de soulignement (_). Certains mots sont réservés et ne peuvent être utilisé comme nom de variable (voir tableau suivant pour une liste non exhaustive). 
-Quelques mots réservés : `break`, `case`, `catch`, `continue`, `const`, `debugger`, `default`, `delete`, `do`, `finally`, `in`, `let`, `new`, `switch`, `throw`, `try`, `var`, `void`, `while`, `with`
+Quelques mots réservés : `break`, `case`, `catch`, `continue`, `const`, `debugger`, `default`, `delete`, `do`, `finally`, `in`, `let`, `new`, `switch`, `throw`, `try`, `var`, `void`, `while`, `with`.
 
 ## Type
 En JavaScript, les variables (ou propriétés lorsque celles-ci sont définies dans des objets) peuvent être de plusieurs types.
@@ -306,12 +319,13 @@ Exemple (ouvrez la console pour voir les sorties) :
 * [Instructions \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions)
 * [if...else \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/if...else)
 * [switch \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/switch)
-* [var \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/var)
+* [const \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/const)
 * [let \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/let)
+* [var \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/var)
 * [fonction \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/function)
 * [for \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/for)
 * [while \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/while)
-* [do...shile \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/do...while)
+* [do...while \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/do...while)
 * [for...in \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/for...in)
 * [Opérateurs \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/Opérateurs)
 * [Objets globaux \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/Objects_globaux)

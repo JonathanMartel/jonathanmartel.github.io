@@ -1,14 +1,13 @@
 ---
 layout: note_cours
 permalink: /note-de-cours/js-note-de-cours-poo-classe
-title: "La POO : les classes"
-path: 2022-08-11-javascript-poo-classe.md
+title: "Les classes"
+path: javascript-poo-classe.md
+date: "2022-08-16"
 tag: js
-status: publish
-has_children: true
+status: draft
 toc: javascript-note
-order: 21
-subpage: 1 
+order: 31
 collection: note_javascript
    
 ---

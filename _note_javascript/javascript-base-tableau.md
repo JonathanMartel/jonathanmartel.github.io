@@ -2,7 +2,8 @@
 layout: note_cours
 permalink: /note-de-cours/js-note-de-cours-tableau
 title: "Les tableaux"
-path: 2020-09-29-javascript-tableau.md
+path: javascript-base-tableau.md
+date: "2022-08-16"
 tag: js
 status: publish
 has_children: true

@@ -2,7 +2,8 @@
 layout: note_cours
 permalink: /note-de-cours/js-note-de-cours-fonctions
 title: "Les fonctions"
-path: 2020-09-29-javascript-fonctions.md
+path: javascript-base-fonctions.md
+date: "2022-08-16"
 tag: js
 status: publish
 has_children: true
@@ -29,7 +30,7 @@ Rapporté à des objets les fonctions sont appelées des méthodes et peuvent av
 Les fonctions sont définies en utilisant le mot clé `function`, suivi des éléments suivants :
 
 -   Un identifiant ou un nom. Le nom de la fonction servira lors des appels et représente un objet de type `fonction`.
--   Une liste d'identifiants optionnels séparés par des virgules et contenue entre parenthèses. Appelé *paramètre*, ces identifiants sont des valeurs dont pourra disposer la fonction pour opérer.
+-   Une liste d'identifiants optionnels séparés par des virgules et contenue entre parenthèses. Appelés *paramètre*, ces identifiants sont des valeurs dont pourra disposer la fonction pour opérer.
 -   Un ensemble d'accolade `{ }` qui délimitera le bloc d'instructions de la fonction
 
 
@@ -94,10 +95,11 @@ a; //=> 2;
 Dans ce cas, la variable `a` est définie à deux endroits distincts et possède deux valeurs. En fait et bien qu'aillant le même identifiant `a`, la variable dans la fonction et celle à l'extérieur ne sont pas les mêmes. Celle qui est définie dans la fonction n'existe que durant l'exécution de la fonction et n'est pas accessible à l'extérieur de celle-ci. Même chose pour celle définie à l'extérieur de la fonction, elle n'est pas accessible dans la fonction.
 
 # Utilisation avancée des fonctions
-JavaScript admet plusieurs façons pour travailler avec les fonctions ainsi que pour les définir. Puisque les fonctions sont aussi des objets, elles peuvent être définies comme les autres types et assignées à des variables. Cette possibilité sera fréquemment utilisé pour définir des méthodes d'une classe personnalisée [voir section
-Programmation orientée objet](Lien). 
+JavaScript admet plusieurs façons pour travailler avec les fonctions ainsi que pour les définir. Puisque les fonctions sont aussi des objets, elles peuvent être définies comme les autres types et assignées à des variables. Cette possibilité sera fréquemment utilisé pour définir des méthodes d'une classe personnalisée ([voir section
+Programmation orientée objet](/note-de-cours/js-note-de-cours-poo)). 
 
-À l'aide du mot-clé `function` et de l'opérateur d'assignation `=`, il est possible de définir une fonction de la même manière que lorsqu'on assigne une valeur à une variable.
+## Expression de fonction et assignation de fonction
+À l'aide du mot-clé `function` et de l'opérateur d'assignation `=`, il est possible de définir une fonction de la même manière que lorsqu'on assigne une valeur à une variable, il s'agit d'une expression de fonction. Elle est très similaire à la déclaration de fonction, mais ne profite pas de la remontée (*hoisting*) ([Pour en savoir plus sur le hoisting](https://developer.mozilla.org/fr/docs/Glossary/Hoisting))
 
 Exemple :
 ```js
@@ -131,9 +133,9 @@ Exemple :
 ```js
 let o = {
     m: function (a, b) {       // Le mot clé this fait référence à l'objet sur lequel l'appel est fait.
-                    this.x += a; // Ajoute la valeur de a à la propriété x
-                    this.y += b; // Ajoute la valeur de b à la propriété y
-                    },
+            this.x += a; // Ajoute la valeur de a à la propriété x
+            this.y += b; // Ajoute la valeur de b à la propriété y
+        },
     y: 0,
     x: 0
 };
@@ -146,6 +148,31 @@ o.x; // => 60
 o.y; // => 15
 ```
 
+## La fonction fléchée
+La fonction fléchée est une nouveauté de la norme ECMAScript6 (ES6). Elle permet de racourcir la syntaxe des fonctions (qui avait besoin de ça ?) et résoud un problème lié à la déclaration et l'affectation du `this`. 
+
+Syntaxe
+```js
+// Déclaration complète (avec paramètre et avec une valeur de retour)
+let fctFlechee1 = (params [,params])=> {
+    instructions;
+    return expression;  
+}
+// Déclaration longue (sans paramètre, mais avec une valeur de retour)
+let fctFlechee2 = ()=> {
+    instructions;
+    return expression;  
+}
+// Déclaration courte (sans paramètre, mais avec une valeur de retour implicite)
+let fctFlechee3 = () => expression;
+
+// Déclaration courte (un seul paramètre et avec une valeur de retour implicite)
+let fctFlechee4 = params => expression; // Bye bye la lisibilité!
+ 
+```
+La fonction fléchée s'appelle de la même manière que la fonction.
+
+> Notez que `expression` est aussi la valeur de retour par défaut quand elle est la seule instruction du bloc de la fonction (cas 3 et 4). 
 
 # Exercices sur les fonctions
 À venir (ou pas)
@@ -153,6 +180,6 @@ o.y; // => 15
 
 # Sources additionnelles
 * [Les fonctions \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/function)
-
+* [Fonctions fléchées \- JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 
 

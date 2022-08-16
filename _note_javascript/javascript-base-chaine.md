@@ -2,7 +2,8 @@
 layout: note_cours
 permalink: /note-de-cours/js-note-de-cours-chaines
 title: "Les chaines de caractères"
-path: 2020-09-29-javascript-chaine.md
+path: javascript-base-chaine.md
+date: "2022-08-16"
 tag: js
 status: publish
 has_children: true
