@@ -3,7 +3,7 @@ layout: note_cours
 permalink: /note-de-cours/js-note-de-cours-poo-classe
 title: "Les classes"
 path: javascript-poo-classe.md
-date: "2022-08-16"
+date: "2022-08-17"
 tag: js
 status: draft
 toc: javascript-note
@@ -11,8 +11,11 @@ order: 31
 collection: note_javascript
    
 ---
+L’ECMAScript 2015 ou ES6 fait apparaître un ajout syntaxiquement intéressant dans la gestion des objets en JavaScript. Le TC39 ajoute une déclaration de classe qui, sans remplacer l’héritage prototypal et la gestion des objets, simplie leur déclaration. Les classes ES6 sont un ajout syntaxique afin de clarifier l’écriture des objets en JavaScript, mais n’introduit initialement pas de changement majeur à l’héritage prototypal. 
 
-La programmation orientée o.
+L'utilisation des classes (comme des modules ou des prototype) permet de gérer facilement la portée de nos variables et de protéger l'accès aux diverses méthodes et propriétés de notre application. 
+
+
 
 <div class="toc" markdown="1">
 <span class="gamma">Table des matières</span>
@@ -21,194 +24,117 @@ La programmation orientée o.
 {:toc}
 </div>
 
-## Le patron de conception Module
-Le JavaScript est un langage de programmation qui peut avoir de multiples facettes et de multiples structures. Il n'y a qu'à penser aux fonctions anonymes, aux objets littéraux ou à la syntaxe des librairies externes telles que jQuery pour voir la grande diversité et la complexité de ce langage. La section suivante présentera quelques éléments qui apparaissent comme des techniques avancées et permettent de passer à un autre niveau dans l'usage de JavaScript. L'objectif de cette section est d'explorer le patron de conception Module. Pour ce faire, il faut d'abord voir certains principes en JavaScript tels que les fermetures ou clôtures (*closures*) et les *Immediately Invoked Function Expression* (IIFE).
+# Les classes en JavaScript
+Les classes ES6 ont l'avantage d'offrir une déclaration simple, sans (trop) d'ambiguité. Elles se déclare de manière similaire aux classes d'autres langages de programmation orientée objet. Par contre, elles ont leurs spécificités! 
 
-### Closure
-Une *closure* est une fonction qui retient la référence à son environnement, permet d'enregistrer et de conserver les valeurs de ses variables tout au long du déroulement du programme. Une *closure* est définie quand une fonction est définie à l'intérieur du corps d'une autre fonction et accède à des variables locales de celle-ci. Il ne s'agit donc pas d'un autre type d'objet ou d'un autre type de fonction, mais bien d'une structure syntaxique spécifique qui permet de créer des fonctions possédant une « mémoire » de certaines valeurs. Normalement, la portée des variables définies à l'intérieur des fonctions ne dépasse pas le stade de leur exécution, elles sont normalement effacées une fois la fonction terminée. Dans une fermeture, ces variables sont maintenues et reste disponible pour la fonction imbriquée.
+## Déclaration des classes
+Comme nous l'avons vue dans une section précédente, la déclaration des classes se fait en utilisant le mot clé `class` accompagné du nom de la classe. Cette syntaxe admet la déclaration explicite d'un constructeur, de méthodes et de propriétés (avec ou sans valeur initiale). 
 
-Dans l'exemple suivant, la variable b ne maintient pas sa valeur entre les deux appels de la fonction aPlusB().
-
-Exemple :
+Syntaxe de base :
 ```js
-function aPlusB(a, b) {
-    let x;
-    if(b)
-    {
-        x = b;
+class NomObjet  {
+    nomPropriete1 = "";
+    nomPropriete2;
+
+    constructor ([params]){
+
     }
-    return x + a;
-}
-let res = aPlusB(5, 4);
-console.log(res); // 9
-let res = aPlusB(5);
-console.log(res); // NaN, la valeur de x n'est pas maintenue entre les deux appels.
+
+    methode1 ([params]) { // Méthode
+        // Instruction
+    }
+
+    methode2 ([params]) { // Méthode
+        // Instruction
+    }
+};
 ```
+Le constructeur, comme les méthodes, peuvent être défini avec ou sans paramètre. Le constructeur ne peut pas définir de valeur de retour, mais les méthodes le peuvent. 
 
-Cet exemple est un peu plus complexe et agit de manière inattendue. C'est là même l'exemple d'une *closure*.
+## Accès aux propriétés et méthodes dans la classe
+À l'intérieur d'une classe, il est possible d'avoir accès aux propriétés ou aux méthodes de l'instance de l'objet en utilisant le mot-clé `this`. Dans une classe ou bien une instance d'objet (à moins d'exception que nous verrons plus loin), le `this` fait référence à l'instance de la classe. Ainsi, s'il existe plusieurs instances d'un objet "Livre", chaque instance aura accès aux propriétés d'elle-même et non des autres instances. L'exemple suivant montre l'accès aux propriétés en utilisant une propriété ou une méthode.
 
-Exemple :
+Exemple : 
 ```js
-function closure() {
-    let x=0;
-    let y=0;
-    return function (a, b) {
-        if (b)
-        {
-            x = b;
-        }
-        if(a)
-        {
-            y = a;
-        }
-        return x + y;
-    };
-}
+class Livre  {
+    nbPage;         // La déclaration des propriétés publiques est optionnelles
+    titre;
+    constructor (nbPage, titre){
+        this.nbPage = nbPage;   // Assigne les valeurs reçues en paramètre aux propriétés de l'instance de Livre
+        this.titre = titre;
+    }
+    getNbPage(){
+        return this.nbPage;
+    }
+    setNbPage(nbPage){
+        this.nbPage = nbPage;
+    }
+};
 
-let aPlusB = closure(); // aPlusB devient la fonction retourné par closure().
+const livre1 = new Livre(300, "Livre 1")    // Pour un Livre qui se déclare en fonction du nombre de page et de son titre
+const livre2 = new Livre(200, "Livre 2")    // Pour un Livre qui se déclare en fonction du nombre de page et de son titre
 
-let res1 = aPlusB(5, 4); // 5 + 4 = 9
-console.log(res1); // Donc 9
-let res2 = aPlusB(5); // 5 + ? = ?
-console.log(res2); // 9, pourquoi ?
-let res3 = aPlusB(null,10); // null + 10 = ?
-console.log(res3); // 15, pourquoi ?
+let nombrePageL1 = livre1.nbPage;           // => retourne 300 
+let nombrePageL1_v2 = livre1.getNbPage();   // => retourne 300 
+let nombrePageL2 = livre2.nbPage;           // => retourne 200
+let nombrePageL2_v2 = livre2.getNbPage();   // => retourne 300 
+
+livre2.nbPage = 4000;                       // Changement de taille du livre2
+nombrePageL2 = livre2.nbPage;           // => retourne 4000
+nombrePageL2_v2 = livre2.getNbPage();   // => retourne 4000
+
+livre2.setNbPage (100);                     // Changement de taille du livre2
+nombrePageL2 = livre2.nbPage;           // => retourne 100
+nombrePageL2_v2 = livre2.getNbPage();   // => retourne 100
 ```
-La fonction aPlusB(a, b) maintient sa référence à son contexte ou à son environnement lors de sa création, c'est-à-dire à la fonction closure(). Les variables x et y conservent donc leur valeur au-delà de l'appel de closure() et son accessible à l'aide de la fonction aPlusB(). 
 
-La ligne let aPlusB = closure(); est cependant inélégante et le rapport entre le nom de la fonction closure() et la fonction finale (aPlusB()) n'est pas très explicite. Cette méthode de travail profiterait de pouvoir s'effectuer avec une fonction anonyme. Cependant, pour que la fonction aPlusB() retiennent la valeur de x et de y, il faut que la fonction soit appelée et non simplement déclaré. Ainsi l'exemple suivant ne fonctionne pas puisque la fonction anonyme n'est pas appelée initialement.
+Dans certains cas (la majorité), il peut être avantageux de protéger l'accès aux propriétés qui sont essentielles à l'objet. Dans le cas précédent, si nous souhaitons que le nombre de page du livre ne puisse être modifié directement ou bien qu'il y ait une validation, il faudrait protéger la propriété nbPage et la rendre privée. C'est ce que la proposition des champs de classes (TC39/proposal-class-fields) a introduit et qui fut adopté progressivement par l'ensemble des navigateurs (2020-2021). 
 
+Exemple : 
 ```js
-let aPlusB = function () {
-    let x=0;
-    let y=0;
-    return function (a, b) {
-        if (b)
-        {
-            x = b;
-        }
+class Livre  {
+    #nbPage;         // La déclaration des propriétés privées est obligatoire
+    #titre;
+    constructor (nbPage, titre){
+        this.#nbPage = nbPage;   // Assigne les valeurs reçues en paramètre aux propriétés de l'instance de Livre
+        this.#titre = titre;
+    }
+    getNbPage(){
+        return this.#nbPage;
+    }
+    setNbPage(nbPage){
+        this.#nbPage = nbPage;
+    }
+};
 
-        if(a)
-        {
-            y = a;
-        }
-        return x + y;
-    };
-}
+const livre1 = new Livre(300, "Livre 1")    // Pour un Livre qui se déclare en fonction du nombre de page et de son titre
+const livre2 = new Livre(200, "Livre 2")    // Pour un Livre qui se déclare en fonction du nombre de page et de son titre
 
-let res = aPlusB(5, 4); // 5 + 4 = 9
+let nombrePageL1 = livre1.nbPage;           // => retourne undefined
+nombrePageL1 = livre1.#nbPage;              // => retourne SyntaxError
+let nombrePageL1_v2 = livre1.getNbPage();   // => retourne 300 
 
-console.log(res); // => function()
+livre2.nbPage = 4000;                       // Changement de taille du livre2 ?
+nombrePageL2 = livre2.nbPage;               // => retourne 4000
+nombrePageL2_v2 = livre2.getNbPage();       // => retourne 200, la propriété nbPage et #nbPage ne sont pas les mêmes. 
+
+livre2.setNbPage (100);                     // Changement de taille du livre2
+nombrePageL2 = livre2.nbPage;               // => retourne 4000
+nombrePageL2_v2 = livre2.getNbPage();       // => retourne 100
 ```
-
-La manière de contourner le problème est d'utiliser une *Immediately Invoked Function Expression* (IIFE).
-
-## *Immediately Invoked Function Expression* (IIFE)
-La IIFE est une fonction qui s'appelle automatique et immédiatement après avoir été déclaré.
-Syntaxe
-
-```js
-// Syntaxe recommandée
-(function() {
-    /* code */
-})();
-
-// Syntaxe recommandée avec passage de paramètre
-(function(param) { // Paramètre reçu
-    /* code */
-})(param); // paramètre passé à la IIFE
-```
-
-Elle est utilisée de plusieurs manières et dans plusieurs contextes. D'abord, elle permet d'isoler les fonctions et les variables dans un « scope » spécifique qui ne serait pas accessible au reste du code. Ensuite, comme elle est appelée automatiquement, elle est idéale dans les cas où l'on voudrait appliquer un correctif spécifique pour un navigateur, par exemple un « polyfill ». La IIFE peut aussi retourner des valeurs, elle pourrait donc être utilisée afin de créer ou d'initialiser un objet. C'est sur cet aspect qu'est construit le Module pattern.
-
-Exemple
-```js
-let aPlusB = (function() {
-    let x = 0;
-    let y = 0;
-    return function(a, b) {
-        if (b) {
-            x = b;
-        }
-
-        if (a) {
-            y = a;
-        }
-
-        return x + y;
-    };
-})();
-
-let res = aPlusB(5, 4); // 5 + 4 = 9
-console.log(res); // Donc 9
-let res = aPlusB(5); // 5 + ? = ?
-console.log(res); // 9, pourquoi ?
-console.log(aPlusB.x); // => undefined, aucun accès puisque seule la fonction est retournée
-```
-## Module pattern en JavaScript
-Par définition, les propriétés et les méthodes d'un prototype ne peuvent être cachées à l'intérieur de l'objet. Il ne peut y avoir de propriétés inaccessibles puisque l'objet lui-même devient le modèle permettant la création des autres instances. Il existe une méthode de travail qui permet de reproduire le modèle de définition privée des propriétés et des méthodes des langages à classe. L'utilisation du patron de conception Module (*Javascript Module Pattern*) permet de contourner cette limite et de produire des objets ayant  des propriétés et des méthodes privées et publiques. Le Module Pattern consiste à utiliser dans une IIFE le principe des *closures* ce qui permet de retourner un objet littéral composé uniquement des méthodes et des propriétés publiques accessibles.
-
-Il est possible de retourner deux modèles d'objet dans le patron Module, l'un avec un prototype et l'autre sans prototype
-
-Exemple 1 : avec prototype
-```js
-let module = (function() {
-    // Variables privées
-    let foo = 'bar';
-    
-    // Méthodes privées
-    function test(){};
-    
-    // Section publique
-
-    // constructeur
-
-    let module = function() {};
-    
-    // prototype
-    module.prototype = {
-        constructor: module,
-        methode1: function() {},
-        methode2: function() {}
-    };
-
-    // Retour de l'objet avec son prototype
-    return module;
-})();
-
-let monModule = new module(); // Instanciation de l'objet
-```
-
-Exemple 2 : sans prototype
-```js
-let monModule = (function() {
-    // Variables privées
-    let foo = 'bar';
-
-    // Méthodes privées
-    function test(){};
-
-    // Retour des methodes publiques
-    return {
-        get: function() {
-            return foo;
-        },
-        set: function(val) {
-            foo = val;
-        },
-        Methode1: function() {}
-    };
-})();
-```
-
-Dans le premier cas, l'objet module contient un prototype donc il peut être instancié. Il devrait être utilisé dans des cas où l'on doit déclarer plusieurs objets de ce type. Dans le deuxième cas, monModule est déjà instancié et il ne contient pas de prototype. Il doit être privilégié quand un seul objet de ce type doit être créé, tel que dans un objet qui contiendrait des méthodes utilitaires.
+> Il faut expliquer correctement pourquoi ça fait ça!
 
 
-# Stratégies et astuces de travail avec les objets
+## Les *Modules* et les Import/Export 
 
 
 
-# Exercices sur les objets
+
+# Stratégies et astuces de travail avec les classes/modules
+
+
+
+# Exercices sur les classes/modules
 
 
 
