@@ -120,7 +120,7 @@ b.addEventListener("click", function(){
                                 console.log("le même clique, mais un autre gestionnaire")
                             });
 ```
-> Dans l'exemple, la chaine "un clique" sera affiché avant "le même clique, mais un autre gestionnaire". Les gestionnaires sont appelés dans l'ordre. 
+> Dans l'exemple, la chaine "un clique" sera affichée avant "le même clique, mais un autre gestionnaire". Les gestionnaires sont appelés dans l'ordre. 
 
 Il est à noter que la fonction de rappel, le gestionnaire d'événement, n'a pas à être une fonction anonyme. Elle peut être une fonction nommée (ou une fonction fléchée).
 
@@ -178,7 +178,7 @@ Chaque type d'événement défini ses propres propriétés, mais il existe des p
 >   - Contient la position du pointeur de la souris lors de l'événement
 > - Événement.currentTarget
 >   - Contient l'élément qui est la cible actuel de l'événement. Si l'événement se propage, le currentTarget change
-> - Événement.originalTarget, Événement.target
+> - Événement.target
 >   - Contient l'élément qui est la cible originale de l'événement.
 > - Événement.preventBubble()
 >   - Arrête la phase de bubbling
