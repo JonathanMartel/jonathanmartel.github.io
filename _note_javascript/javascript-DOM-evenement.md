@@ -1,12 +1,11 @@
 ---
 layout: note_cours
-permalink: /note-de-cours/js-note-de-cours-dom
+permalink: /note-de-cours/js-note-de-cours-dom-event
 title: "Le DOM"
-path: javascript-DOM-intro.md
+path: javascript-DOM-evenement.md
 date: "2022-08-16"
 tag: js
-status: draft
-has_children: true
+status: publish
 toc: javascript-note
 order: 21
 collection: note_javascript
@@ -24,520 +23,248 @@ collection: note_javascript
 {:toc}
 </div>
 
-# Le *Document object model* (DOM)
-Le JavaScript côté-client est interprété à l'intérieur d'un navigateur, mais principalement de sa fenêtre. Celle-ci dispose de méthodes et de propriétés accessibles sur l'objet `window`. L'objet `window` est instancié automatiquement par le navigateur et le code JavaScript de la balise `<script>` est contenu dans cet objet global. L'objet `window` possède des propriétés spécifiques du navigateur telles que la taille de la fenêtre et l'url du document. Parmis les propriétés de cet objet, on retrouve l'objet `document` qui réfère spécifiquement au document html chargé par le navigateur. Ce dernier qui contient l'ensemble des propriétés et des méthodes nécessaires à la manipulation du contenu du document chargé.
+# Les événements
 
-La propriété document est définie par le DOM (*Document object model*). Cet API spécifie les méthodes et les propriétés qui permettent de représenter et de manipuler le contenu d'un document HTML ou XML.
+Le JavaScript côté client, c'est-à-dire dans un navigateur, est basé sur un modèle de programmation conçu autour d'événements asynchrones.
+Le navigateur Web génère des événements en fonction de ce qui se passe dans le document ou la fenêtre. Les fonctions JavaScript peuvent alors
+recevoir des avertissements lors de l'événement et produire un comportement en réponse. Les types d'événements qui peuvent être générés varient énormément, pensons notamment à un clic de souris, la fin du chargement du document, le défilement de la mollette de la souris, lorsqu'un usager appuie sur une touche du clavier, etc. Si le programme a besoin de répondre à l'événement, il doit l'enregistrer et spécifier une fonction qui sera appelée à chaque occurrence de celui-ci. Cette fonction sera appelée un gestionnaire d'événement.
 
-## Représentation du DOM et accès aux éléments
-Les objets du DOM sont représentés sous forme d'un arbre de données. Chaque noeud peut avoir un parent, des ancêtres, un ou des enfants, des descendants et des frères/soeurs (*sibblings*)
+## Les types d'événement
+
+Il existe plusieurs types d'événement qui peuvent être générés par le navigateur. Il n'existe cependant pas de standard ou de liste défini d'événement possible. Leur nombre varient de jour en jour en fonction du développement de nouveau navigateur, mais aussi en fonction des diverses plateformes qui apparaissent. Les plateformes mobiles et les écrans multitouches ont fait apparaître plusieurs événements en rapport avec la gestuelle des doigts sur l'écran.
+
+Toutefois, il est possible de définir des catégories générales d'événement qui permettent de mieux comprendre quels sont les événements possibles.
+
+### Événements dépendants du périphérique d'entrée 
+Ces événements comprennent tous les comportements qui sont liés à un périphérique d'entrée particulier comme ceux provenant des mouvements
+de la souris (Relâchement d'un bouton, déplacement, défilement, etc), du clavier et des écrans tactiles.
+
+### Événements indépendants du périphérique d'entrée 
+Ce sont les événements qui ne sont pas liés à un périphérique particulier. Ce sont par exemple les événements comme le fait de cliquer sur un bouton, un lien ou dans un champ de texte. Comme cet événement peut être fait à partir d'un clavier, d'une souris ou d'un geste du doit, il devient indépendant du périphérique
+
+### Événements de l'interface utilisateur 
+Ceux-ci sont spécifiquement liés à l'interface utilisateur et sont générés principalement par les changements fait sur les éléments HTML.
+Le déplacement du curseur dans un champ texte d'un formulaire ou bien le changement d'état d'une case à cocher sont de cette catégorie.
+
+### Événements de changement d'état
+
+D'autres événements ne sont pas liés à un geste de l'utilisateur. Ils viennent uniquement de changement d'état de la page ou de la réception de données en provenance du serveur. Lorsque le document est pleinement chargé, par exemple, un événement de ce type est généré.
+
+### Événements selon un API spécifique 
+
+L'ajout de plusieurs APIs augmente aussi le nombre d'événement possible. Ces dernières sont liés à des modules spécifiques, tels que ceux liés au glisser-déposer et aux événements de la balise `<video>` ou `<audio>` en HTML.
+
+## L'enregistrement de gestionnaire d'événements
+
+Il existe trois manières d'enregistrer un gestionnaire d'événement, c'est-à-dire de spécifier quelle fonction sera lancée lors de la
+réception de l'événement. Les deux premières façons de faire sont présentés pour des raisons historiques, elles ne sont pas recommandé et ont des effets indésirables.
+
+### Par les attributs (à ne pas faire)
+
+La première manière consiste à entrer le code JavaScript à exécuter dans un attribut spécifique des balises HTML. L'exemple suivant montre
+comment on peut enregistrer l'appel de la fonction console.log() lors d'un clique sur un paragraphe spécifique.
 
 Exemple :
-```html
-<html>
-    <head>
-        <title>Document HTML</title>
-    </head>
-    <body>
-        <h1>Titre de niveau 1</h1>
-        <p>Un paragraphe avec un élément en <em>italique</em></p>
-    </body>
-</html>
-```
-Dans l'exemple précédent, `<html>` est le parent de `<head>` et de `<body>`. Ces deux éléments sont frères (*sibling*). `<h1>` et `<p>` sont les enfants de `<body>`. `<h1>`, `<p>` et `<em>` sont les descendants de `<body>`. `<html>`, `<body>` et `<p>` sont les ancêtres de `<em>`. Les éléments de texte, exclut dans la liste précédente, sont aussi considérés comme des noeuds dans le DOM.
-
-Il n'est toutefois pas essentiel de connaître l'emplacement d'un noeud dans une branche pour accéder à ce noeud. Le DOM défini principalement quatre manières distinctes d'accéder à un élément HTML : par sélecteur CSS, par identifiant (*id*), par nom (*name*) et par nom de balise (*tagname*). Bien que la première manière soit à privilégier, la section suivante s'emploie à présenter ces quatre façons. 
-
-### Par sélecteur CSS
-Le CSS définissent des manières très efficaces et puissantes de faire des requêtes sur les balises HTML. Le DOM défini deux méthodes qui permettent d'utiliser la syntaxe des sélecteurs CSS. La méthode `querySelectorAll(sel)` retourne un `NodeList` qui contient un tableau d'ojet de type `Element` représentant les éléments trouvés et la méthode `querySelector(sel)` retourne un objet de type `Element` représentant le premier élément trouvé.
-
-Exemple :
 ```js
-// Retourne le premier boutons radio cochés.
-let radio_cocher = document.querySelector('input[type="radio"]:checked');
-
-// Retourne un nodeList de tous les boutons radio qui sont cochés.
-let aRadio_cocher = document.querySelectorAll('input[type="radio"]:checked');
+<p onclick="console.log('Vous avez cliqué ici !');">Cliquez ici</p>     // Très mauvais code.
 ```
+Il est même possible d'enregistrer plusieurs instructions dans l'attribut de l'événement. Il faut alors séparer les instructions
+correctement par des points-virgules ou bien inscrire les valeurs de l'attribut sur plusieurs lignes.
 
-### Par identifiant
-C'est la méthode la plus rapide et direct d'accéder à un élément HTML unique. Chaque élément HTML qui a un attribut `id` peut être accédé de cette manière. Notez que chaque `id` doit être unique dans un document Web. Pour accéder à un élément ayant un identifiant unique, il faut utiliser la méthode getElementById(id).
-
-Exemple :
+Exemple :
 ```js
-let paragraphe = document.getElementById("para1");
-
-// Est l'équivalent de :
-let paragraphe = document.querySelector("#para1"); 
+<button onclick="console.log('Vous avez cliqué ici !'); console.log('Testde bouton'); ">Cliquez ici</button>    // Vous allez perdre votre emploi pour ça!
 ```
-La méthode retourne un objet de type `Element` qui contient des propriétés et des méthodes de bases qui permettent de manipuler le contenu de l'élément HTML.
+Les attributs d'événement changent selon le type de balise.
 
-### Par nom (*name*)
-Certaines balises, ceux d'un formulaire, doivent contenir un attribut `name` afin de soumettre leur valeur à un serveur. Il est aussi possible d'accéder à ces éléments en utilisant leur attribut `name` avec la méthode `getElementsByName(nom)`.
+Comme vous le savez, il faut éviter de mélanger le JavaScript et le HTML, comme il est de mise de distinguer le CSS du HTML. Dans ce cas, il faudra éviter d'utiliser cette manière de faire.
 
-Exemple :
+### Par la propriété de l'objet window (ouf, limite acceptable, mais pas vraiment acceptable)
+
+Une autre manière d'enregistrer un événement est d'associer une fonction sur la propriété de l'élément cible de l'événement. Cette fonction sera alors appelée lorsque l'événement sera généré par ou sur l'élément cible. L'exemple suivant montre comment enregistrer une fonction sur l'événement onload de l'objet window qui est généré à la fin du chargement du DOM, quand le document est prêt à être lu. La fonction enregistre un autre événement sur la soumission d'un formulaire.
+
+Exemple :
 ```js
-let aChampNom = document.getElementsByName("nom");
+// Enregistrement de l'événement onload avec une fonction d'initialisation qui enregistre une autre fonction sur la soumission d'un formulaire
 
-// Est l'équivalent de :
-let aChampNom = document.querySelectorAll("[name='nom']");
-```
-Contrairement à l'attribut `id`, le contenu de l'attribut `name` n'a pas à être unique. Pour cette raison, la méthode ne renvoie pas directement un objet de type `Element`, mais plutôt un objet de type `NodeList` qui est similaire à un tableau et contient les éléments trouvés (type `Element`). Le premier élément trouvé sera à l'index 0.
+window.onload = function () {
+    let monForm = document.getElementById('monForm'); // Recherche de l'élément
 
-### Par type de balise
-Le DOM défini aussi une méthode pour accéder à tous les éléments d'un même type, c'est-à-dire à tous les éléments ayant la même balise. En utilisant la méthode `getElementsByTagName(balise)`, il est possible d'accéder à tous les éléments d'un certain type.
+    // Enregistre l'événement onsubmit qui sera lancé avant la soumission du form
+    monForm.onsubmit = fonction(){ /* code de la fonction */};
+};
+``` 
+Cette méthode très simple peut poser un problème par contre. En modifiant directement la valeur de la propriété de l'événement, cela remplace tout comportement qui serait déjà attribué à cet événement. Dans le cas de l'écriture d'une librairie qui ajouterait, par exemple, des comportements génériques sur les paragraphes, il ne faudrait pas écraser le code déjà associé à un élément par l'usager de la librairie. La prochaine manière permet d'éviter ce problème et devrait être privilégié en tout temps.
 
-Comme dans l'exemple suivant :
+### Avec la méthode *addEventListener()* (Voilà la bonne façon de faire)
+
+Cette troisième manière devrait devenir la manière à privilégier pour attacher ou enregistrer un événement sur un élément cible. Elle permet notamment d'attacher plusieurs fonctions sur le même élément, de contrôler la propagation des événements et maintient la séparation entre le contenu (HTML), la mise en page (CSS) et l'interactivité (JavaScript).
+
+La méthode `addEventListener()` est défini sur l'objet window et pour la majorité des éléments du DOM qui sont des cibles ou des sources potentielles d'événements. La méthode demande trois paramètres (le dernier est optionnel et rarement utilisé), selon la syntaxe suivante :
+
+Syntaxe : 
 ```js
-let para = document.getElementsByTagName('p');
-
-// Est l'équivalent de :
-let para = document.querySelectorAll("p");
+Element.addEventListener(strEvenement, fctFonction,[boolCapture])
 ```
-Tout comme la méthode précédente, celle-ci retourne un `NodeList`. Cette méthode est aussi défini dans les objets de type `Element`. Il est donc possible de chercher tous les éléments HTML ayant un type de balise spécifique qui sont un descendant d'un élément trouvé.
+`addEventlistener` attache la fonction `fctFonction` sur l'événement `strEvenement` de l'objet `Element`. Le paramètre `boolCapture` prend normalement la valeur false. Ce paramètre est optionnel, mais peut être requis dans certains cas. (Voir la sous-section [Propagation des événements](lien) pour plus de détails).
 
-Exemple :
+L'exemple suivant enregistre deux gestionnaires pour l'événement `click` d'un bouton.
+
+Exemple :
 ```js
-let para = document.getElementsByTagName('p');
-let em = para[0].getElementsByTagName('em');
-
-// Est l'équivalent de : 
-let em = document.querySelectorAll("p > em");
-//ou 
-let para = document.querySelector("p");
-let em = para.querySelectorAll("em");
+let b = document.querySelector('.bouton');
+b.addEventListener("click", function(){
+                                console.log("un clique")
+                            });
+b.addEventListener("click", function(){
+                                console.log("le même clique, mais un autre gestionnaire")
+                            });
 ```
-Cet exemple retourne un `NodeList` de tous les éléments `<em>` qui sont descendant du premier élément `<p>`.
+> Dans l'exemple, la chaine "un clique" sera affiché avant "le même clique, mais un autre gestionnaire". Les gestionnaires sont appelés dans l'ordre. 
 
-
-# Navigation dans le DOM
-
-Une fois que la requête nous renvoie un résultat valide, il est possible d'utiliser la représentation en arbre du DOM pour se promener d'un noeud à un autre ou d'un élément à un autre. Le DOM fait une distinction entre noeud (`Node`) et élément (`Element`). Les `Element` sont des `Node`, mais ces derniers ne sont pas tous des `Element`. Par exemple, les fragments de texte sont des noeuds dans l'arbre mais ne sont pas des éléments. Le texte dans une balise `<p>` est un noeud, mais n'est pas un élément. La balise `<p>` est un élément et un noeud. 
-> Il faut parfois utiliser des méthodes et des propriétés des `node` pour manipuler les éléments du DOM, mais il faut toujours être prudent puisque les `node` peuvent référer à des saut de ligne, des commentaires HTML ou bien d'autres fragments que l'on ne désire pas manipuler habituellement.
-
-> Propriétés des `Node`:
->
-> - Node.parentNode
->   - Réfère au noeud qui est parent de Node
-> - Node.ChildNodes
->   - Objet NodeList des descendants de Node
-> - Node.firstChild
->   - Réfère au noeud qui est le premier enfant de Node.
-> - Node.lastChild
->   - Réfère au noeud qui est le dernier enfant de Node.
-> - Node.nextSibling
->   - Réfère au noeud qui est le prochain frère de Node.
-> - Node.previousSibling
->   - Réfère au noeud qui est le frère précédent de Node.
-> - Node.nodeValue
->   - Le contenu texte d'un noeud Text ou Comment.
-> - Node.nodeName
->   - Le nom de la balise (tagname)
-> - Node.nodeType
->   - Contient un entier qui définit le type de noeud de Node. Document = 9, Element = 1, Text = 3, Comments = 8, document-fragment = 11
-
-> Propriétés des `Element`:
-> - Element.children
->   - Un NodeList des enfants de Element
-> - Element.firstElementChild
->   - Réfère à l'élément qui est le premier enfant de Element.
-> - Element.lastElementChild
->   - Réfère à l'élément qui est le dernier enfant de Element.
-> - Element.nextElementSibling
->   - Réfère à l'élément qui est le prochain frère de Element.
-> - Element.previousElementSibling
->   - Réfère à l'élément qui est le frère précédent de Element.
-> - Element.childElementCount
->   - Contient le nombre d'élément qui sont enfants de Element.
-
-# Objet Element
-L'objet `Element` possède d'autres propriétés et méthodes qui permettent de manipuler leurs attributs, leur contenu et leur apparence. La section suivante n'est pas une présentation exhaustive de tous ces éléments, mais une présentation générale qui sera complétée dans chaque section spécifiquement liés à un usage.
-
-Les attributs des balises peuvent être directement lu comme des propriétés des objets de type `Element`. Pour des fins de clarification du code, il est parfois plus utile d'utiliser les méthodes propres à la lecture et à l'écriture de ces attributs. Le DOM défini 4 méthodes d'accès aux attributs des balises. 
-
->Méthodes :
-> - Element.setAttribute(Attribut, valeur);
->   - Crée ou modifie Attribut selon valeur
-> - Element.getAttribute(Attribut);
->   - Retourne la valeur de Attribut sous forme de chaine de caractère
-> - Element.hasAttribute(Attribut);
->   - Retourne un booléen selon que Attribut existe ou non sur Element
-> - Element.removeAttribute(Attribut);
->   - Efface attribut de Element.
-
-Il faut noter que ces méthodes ne sont pas appropriées pour modifier l'attribut class d'un élément. Le DOM défini des méthodes spécifiques pour lire et modifier les classes des éléments ((voir section Manipulation du CSS](lien)).
-
-# Manipulation du contenu des objets de type Element
-
-Le contenu des objets de type `Element` varie beaucoup d'un document à l'autre. On considèrera par contre qu'il peut être lu de 3 façons distinctes. Premièrement, comme une chaine HTML, incluant toute les balises HTML qui sont incluses dans l'élément. Deuxièmement, comme une chaine de caractère en texte seulement, c'est-à-dire sans les balises HTML contenu dans le texte et troisièmement, comme une série de noeud et d'élément qui possèdent eu aussi des noeuds et des éléments. Selon ce que l'on veut faire avec l'élément trouvé, on pourra utiliser l'une des trois manières de voir le contenu d'un élément (ou bien un mélange des trois). Chaque manière utilise des méthodes et des propriétés distinctes.
-
-## Comme une chaine HTML
-
-Pour récupérer le contenu d'un objet `Element`, il faut utiliser la propriété innerHTML. Celle-ci contient la chaine HTML qui est dans l'élément trouvé.
-
-## Comme une chaine texte
-
-La propriété textContent contient uniquement les éléments textes, vidés de leur balise HTML. Ainsi, la balise `<p>` de l'exemple utilisé en début de section retournera « Un paragraphe avec un élément en italique ». Donc la chaine sans les marqueurs HTML.
-
-## Comme des noeuds
-
-Cette manière, la plus complexe, permet d'aller chercher chaque fragment de texte comme noeud d'un élément HTML. Il faut alors utiliser les propriétés de l'objet Node (défini plus haut dans cette section) pour fouiller l'arbre des noeuds et extraire les noeuds de type texte.
-
-# Créer, insérer et effacer un élément ou un noeud
-## Créer des éléments
-S'il est possible d'altérer des éléments existants, il est aussi possible d'en ajouter dans l'arbre du DOM. Les objets de type `Node`,
-`Text` et `Element` possèdent des méthodes qui permettent la création, l'insertion et l'effacement d'éléments et de noeuds.
-
-Afin d'ajouter des éléments HTML dans l'arbre du DOM, il faut procéder en deux étapes. La première est de créer le noeud ou l'élément. Pour ce faire, il faut utiliser la méthode `createElement(nouvElement)` ou `createTextNode(nouvNoeud)` de l'objet `document`.
+Il est à noter que la fonction de rappel, le gestionnaire d'événement, n'a pas à être une fonction anonyme. Elle peut être une fonction nommée (ou une fonction fléchée).
 
 Exemple : 
 ```js
-let elPara = document.createElement("p");   // Crée un Element de type <p>
-let texte = document.createTextNode("Mon texte") // Crée un TextNode.
+function clicBouton () {
+    console.log("le même clique, mais un autre gestionnaire")
+} 
+let b = document.querySelector('.bouton');
+b.addEventListener("click", ()=> {
+                                console.log("un clique")
+                            });
+b.addEventListener("click", clicBouton);
 ```
-## Insérer des éléments
-Ces deux méthodes crée l'objet dans le document, mais ne le place pas dans le DOM. Il n'apparait donc pas dans la page HTML. La deuxième étape consiste à insérer le noeud dans l'arbre, donc au bon endroit dans le document. Pour ce faire, il faut utiliser une des méthodes d'ajout de noeud (ou d'élément) dans le DOM. 
-> Méthode d'ajout au DOM
-> - ParentNode.appendChild(nouvElement); 
->   - Ajoute nouvElement comme enfant de Node/Element.
-> - ParentNode.insertBefore(nouvElement, Noeud);
->   - Insère nouvElement avant Noeud. La méthode doit être appelée sur le noeud parent de Noeud.
-> - Element.after(noeud1[, noeudN])
->   - Insère n nouvel élément après Element (next sibblings)
-> - Element.before(noeud1[, noeudN])
->   - Insère n nouvel élément dans le parent de Element, avant Element (previous sibblings)
-> - ParentElement.append(noeud1[, noeudN])
->   - Insère n nouvel élément après le dernier enfant de ParentElement
-> - ParentElement.prepend(noeud1[, noeudN])
->   - Insère n nouvel élément avant le premier enfant de ParentElement
-> - Element.insertAdjacentHTML(position, noeud)
->   - Insère noeud par rapport à Element, selon la position (beforebegin : avant Element, afterend : après Element, afterbegin : comme premier enfant de Element, beforeend: comme dernier enfant de Element) 
+Dans le cas de la fonction nommée `clicBouton`, notez que c'est l'objet function `clicBouton` qui est passé en paramètre et non l'appel de la fonction `clicBouton()`. 
 
-L'exemple suivant montre la création d'un paragraphe de texte qui sera inséré dans une balise `<main>`.
-```js
-const elMain = document.querySelector("main");          // Récupère le <main>
-const elPara = document.createElement("p");             // Crée un Element de type <p>
-const nodeTexte = document.createTextNode("Mon texte")  // Crée un TextNode.
-elMain.appendChild(elPara);                             // Insert le paragraphe comme dernier enfant de main
-elPara.append(nodeTexte);                               // Insert le texte dans le paragraphe (à la fin)
-```
-
-## Remplacer ou effacer des éléments
-Il est aussi possible de remplacer et d'effacer des noeuds. Pour effacer un noeud, il faut appeler la méthode `removeChild()` sur le noeud parent du noeud à effacer et passer ce dernier en paramètre.
+## Retrait d'un gestionnaire d'événements
+Il est aussi possible de retirer un gestionnaire d'événement en utilisant la méthode `removeEventListener()`
 
 Syntaxe :
 ```js
-parentNode.removeChild(n); // Enlève le noeud n dans le parentNode.
+cible.removeEventListener(strEvenement, fctFonction,[boolCapture]);
 ```
 
-Pour remplacer un noeud par un nouveau noeud, il faut appeler la méthode `replaceChild()` sur le noeud parent. La méthode prend 2 paramètres : le nouveau noeud et le noeud à remplacer.
+## Définir un gestionnaire d'événement
+
+Le gestionnaire d'événement est une fonction qui doit être enregistrée sur un événement particulier et qui sera appelée lorsque l'événement surviendra. Une simple fonction qui n'attend pas de paramètre peut être utilisée, mais la fonction qui est utilisée comme gestionnaire d'événement peut être définie d'une meilleure façon. 
+
+Lorsque le gestionnaire d'événement est appelé, il est généralement appelé avec un objet Event en paramètre. Ceci permet de créer des gestionnaires d'événement capable d'identifier la source de l'événement et la cible précise. On peut alors attacher le même gestionnaire sur plusieurs éléments.
+
+La syntaxe générique d'un gestionnaire d'événement devrait être la suivante :
 
 Syntaxe :
 ```js
-// Remplace le noeud n par le nouveau noeud créer (<p>)
-parentNode.replaceChild(document.createElement("p"), n);
+function gestionnaire(evenement) {
+    // Placer le code source du gestionnaire ici
+}
 ```
-
-## Méthodes alternatives de manipulation du DOM
-Comme pour bien des choses, il existe des manières alternatives pour effectuer les manipulations du DOM précédemment exposés. Certaines sont plus performances, d'autres plus simples ou bien ne sont qu'une version différente de produire le même résultat. Les méthodes précédemment exposés ont l'avantage d'être sécuritaire et de prétraiter le contenu passé en paramètre avant d'effectuer l'insertion dans le DOM. C'est d'autant plus important si les éléments insérés proviennent de données entrées par un utilisateur. 
-
-
-
-
-# Objet window
-Comme nous l'avons vue précédemment, l'objet `window` possède des propriétés spécifiques du navigateur telles que la taille de la fenêtre et l'url du document, mais aussi des méthodes et des propriétés plus générales telles que ceux définissant des chronomètres et des intervalles.
-
-## Chronométrage et intervalles
-L'API du navigateur permet de créer des comptes à rebours.
-
-**Méthodes**
->`window.setTimeout(fonctionRappel, compte)`
-> 
->La méthode crée un compte à rebours selon le paramètre compte (en ms). Lors de la fin du compte, la fonction est appelée. Le compte à rebours est fait en parallèle et ne bloque pas les autres processus. Ne s'exécute qu'une seule fois.
->La méthode retourne un identifiant (nombre) qui peut être passé à la méthode `clearTimeout()` afin d'annuler le compte à rebours. Chaque compte à rebours retourne un identifiant unique.
-
->`window.clearTimeout(identifiant)` 
->
->Méthode qui permet d'annuler un compte à rebours. La méthode attend un nombre qui est retourné par la méthode setTimeout(). Chaque compte à rebours possède un identifiant unique.
-
->`window.setInterval(fonction, intervalle)`
->
->La méthode crée un compte à rebours selon le paramètre intervalle (en ms) qui se répète à tous les intervalles. Après chaque intervalle, la fonction est appelée. Le compte à rebours est fait en parallèle et ne bloque pas les autres processus. L'intervalle s'exécute en boucle tant qu'il n'est pas arrêté avec la méthode clearInterval().
->La méthode retourne un identifiant (nombre) qui peut être passé à la méthode `clearInterval()` afin d'arrêter le compte à rebours. Chaque compte à rebours retourne un identifiant unique.
-
->`window.clearInterval(identifiant)`
->
->Méthode qui permet d'annuler un compte à rebours d'intervalle. La méthode attend un nombre qui est retourné par la méthode `setInterval()`. Chaque compte à rebours d'intervalle possède un identifiant unique.
-
-# Navigation et url
-L'objet window contient aussi des propriétés et des méthodes qui permettent de contrôler la navigation et de connaître l'URL de la page
-chargée.
-
-Le principal objet de navigation est la propriété `location`.
-
->`window.location`
->La propriété location contient un objet de type Location qui possède des propriétés et des méthodes spécifiques à l'URL de la fenêtre active. La lecture directe de la propriété renvoie toujours la valeur de la propriété href de l'objet Location en faisant un appel implicite à la méthodes `toString()`. La propriété est éditable. L'assignation d'une valeur force un changement d'URL dans le navigateur, de la même façon qu'un lien cliqué par l'usager. Les propriétés de l'objet Location sont éditables de la même manière et provoque un changement d'URL après l'assignation. La valeur assignée à la propriété location peut être relative.
-
-**Propriétés de l'objet location :**
->`location.href`
->Contient l'URL complète.
->
->Exemple :
->"http://www.exemple.com:1234/page/index.html?q=exemple&a=1#resultat"
-
->`location.protocol`
->Contient la partie protocole de l'URL.
->
->Exemple : "http:"
-
->`location.host`
-> 
->Contient la partie hôte et port de l'URL.
->
->Exemple : "www.exemple.com:1234"
-
->`location.hostname`
->
-> Contient la partie hôte seulement de l'URL.
->
-> Exemple : "www.exemple.com"
-
->`location.hash`
->
-> Contient la partie de l'ancre de l'URL après le symbole # (*hash* en anglais)
->
-> Exemple : "#resultat"
-
->`location.pathname`
->
->Contient le chemin d'accès de l'URL.
->
-> Exemple : "/page/index.html"
-
->`location.port`
->
-> Contient le numéro du port de l'URL.
->
-> Exemple : "8080"
-
->`location.search`
->
-> Contient la partie de requête de l'URL.
->
-> Exemple : "?q=exemple&a=1"
-
-**Méthodes de l'objet location :**
-
-> `location.assign(url)`
->
-> Charge un nouvel url, comme si la propriété location.href avait été modifiée.
-
->`location.replace(url)`
-> Charge un nouvel url, en modifiant l'historique. La page précédemment chargée ne peut plus être atteint en reculant dans l'historique du navigateur.
-
-> `location.reload()`
->
-> Recharge la page en cours.
-
-**Objet** history
-
-Un second objet permet de contrôler la navigation. La propriété history
-de l'objet window permet de charger une page qui est dans l'historique
-du navigateur.
-
-**Propriétés :**
-
-history.length
-
-> Retourne le nombre d'item de l'historique.
-
-**Méthodes :**
-
-history.back()
-
-> Charge la page précédente dans l'historique
-
-history.forward()
-
-> Charge la page suivante dans l'historique
-
-history.go(index)
-
-> Se déplace selon la valeur du paramètre index dans l'historique.
->
-> Exemple :
->
-> history.go(-2); //recule de 2 pages
-
-Il faut noter que pour des raisons de sécurité et de protection des
-données confidentielles, les URLs de l'objet history ne peuvent être
-lus directement.
-
-L'environnement de l'usager
-
-Afin de déterminer l'apparence des éléments Web affichés sur l'écran
-de l'usager, il est parfois nécessaire de connaître la configuration de
-son matériel. La taille de l'écran, le nombre de couleur affichable ou
-le type de navigateur utilisé sont des informations qui peuvent
-s'avérer utiles. L'objet window possède deux propriétés qui permettent
-d'accéder à ces informations : navigator et screen.
-
-L'objet de type Navigator qui possède des propriétés spécifiquement
-relié au navigateur. Certaines de ses propriétés ne sont pas standard et
-peuvent être défini différemment d'un navigateur Web à l'autre.
-
-Propriétés :
-
-navigator.appName
-
-> Retourne une chaine spécifiant le nom du navigateur.
-
-navigator.appVersion
-
-> Retourne une chaine spécifiant la version du navigateur.
-
-navigator.userAgent
-
-> Retourne une chaine spécifiant le navigateur.
-
-navigator.platform
-
-> Retourne une chaine spécifiant le système d'exploitation.
-
-navigator.online
-
-> Retourne une valeur booléenne qui spécifie si la page est vu en-ligne
-> ou hors-ligne.
-
-navigator.geolocation (ES5)
-
-> Objet de géolocalisation (voir section Géolocalisation).
-
-**Méthodes :**
-
-navigator.javaEnabled()
-
-> Méthode qui retourne une valeur booléenne selon la disponibilité de
-> l'interpréteur Java
-
-navigator.cookiesEnabled()
-
-> Méthode qui retourne une valeur booléenne selon l'état des témoins
-> (cookies)
-
-Objet Screen
-
-La seconde propriété, l'objet screen, possède 5 propriétés qui
-retournent des informations à propos de la fenêtre du navigateur.
-
-**Propriétés :**
-
-screen.width
-
-> Retourne la largeur de l'écran de l'usager (en pixel)
-
-screen.height
-
-> Retourne la hauteur de l'écran de l'usager (en pixel)
-
-screen.availWidth
-
-> Retourne la largeur disponible pour l'affichage de la page dans
-> l'écran de l'usager (en pixel). La taille des menus et des barres
-> d'outils du navigateur est soustrait de la taille de l'écran.
-
-screen.availHeight
-
-> Retourne la hauteur disponible pour l'affichage de la page dans
-> l'écran de l'usager (en pixel). La taille des menus et des barres
-> d'outils du navigateur est soustrait de la taille de l'écran.
-
-screen.colorDepth
-
-> Retourne le nombre de couleurs disponibles selon la configuration de
-> l'utilisateur (16, 24 ou 32 bits)
-
-
-
-## Modification des règles dans la feuille de style
-
-Les deux manières présentées précédemment modifiaient les règles de
-style qui étaient appliquées sur les éléments du DOM. Il est aussi
-possible d'agir directement sur la liste des règles CSS défini dans la
-feuille de style, qu'elle soit externe ou non.
-
-Les feuilles de styles (plusieurs CSS peuvent être attachés à une page
-Web) se retrouvent dans la propriété document.styleSheet qui est un
-objet sous forme de tableau. Cette propriété contient toutes les
-feuilles de styles attachées au document. On peut alors modifiées ou
-bien seulement activées ou désactivées.
-
-Pour désactiver ou activer une feuille de styles
-
-Afin d'activer ou de désactiver une feuille de styles spécifique, il
-faut utiliser la propriété modifiable *disabled* de l'objet styleSheet.
-Si elle est *true*, la feuille sera désactivée et la valeur false la
-réactivera.
-
-Exemple :
-
-// le code suivant désactive la première feuille de style
-
-document.styleSheet[0].disabled = true;
-
-En plus d'activer et désactiver les diverses feuilles de styles, il est
-possible d'interroger, d'insérer ou d'effacer des règles. Bien qu'il
-soit plus commun et peut-être une meilleure pratique que d'appliquer
-diverses classes sur un élément afin de faire varier son apparence, il
-se peut que l'on ait besoin de modifier dynamique les règles d'une
-feuille de styles.
-
-Dans ce cas, on utilisera alors les méthodes et les propriétés suivantes
-:
-
-**Propriétés :**
-
-styleSheet.cssRules
-
-> Tableau des diverses règles de la feuille CSS. L'accès à la première
-> règle de la première feuille, se fait selon cette syntaxe :
-> document.styleSheet[0].cssRules[0]. Chaque règle possède deux
-> propriétés pour accéder directement à la règle et au sélecteur.
-
-cssRules.selectorText
-
-Contient le sélecteur de la règle CSS.
-
-cssRules.style
-
-Contient le texte de la règle CSS défini par le sélecteur.
-
-cssRules.cssText
-
-Contient le texte complet de la règle CSS (le sélecteur et le style).
-
-**Méthodes :**
-
-styleSheet.insertRule(regle, index)
-
-> Insère la règle passée en chaine de caractère à la position index. Si
-> index est omis, la règle est ajoutée à la fin.
-
-styleSheet.deleteRule(index)
-
-Efface la règle selon index.
-
-
-# Stratégies et astuces de travail avec les objets
-
-
-
-# Exercices sur les objets
-
+Par défaut le gestionnaire d'événement reçoit un objet de type `Event` qui décrit le type d'événement et ses propriétés. Pour un événement `click`, par exemple, il contiendra une référence à l'élément cliqué, la position du curseur, etc. Plusieurs usages peuvent être fait de cet objet, donc notamment en lien avec la propagation des événements.
+
+## Propagation des événements
+
+Les événements en JavaScript ne sont pas exclusivement générés sur l'élément en cause, mais se propage dans le DOM selon la hiérarchie des éléments. Ainsi, un clique sur un lien dans un paragraphe sera disponible pour l'élément cliqué, mais aussi pour le paragraphe, pour la division dans lequel se trouve le paragraphe, pour la balise corps, pour le document et pour la fenêtre. Cette propagation est très importante dans la configuration et la définition des gestionnaires d'événement. Il n'est donc pas nécessaire d'attacher le gestionnaire d'événement sur l'élément cliqué pour être capable de le gérer. Tous les événements peuvent être capté à un niveau supérieur ou inférieur selon les paramètres et les besoins.
+
+Il existe deux phases dans la propagation de l'événement. La première phase, la phase de *capture*, est disponible lorsque le paramètre `boolCapture` de la méthode `addEventListener()` est mise à `true`. Ceci permet aux éléments qui sont les ancêtres de la cible de l'événement de capter l'événement avant la cible originale. Ainsi, si l'on clique sur un paragraphe dans une division, celle-ci pourrait capter l'événement avant le paragraphe et ainsi en faire un traitement. La seconde phase est le *bubbling* qui permet aux éléments qui sont les ancêtres de la cible de l'événement de recevoir aussi l'événement, mais après la cible originale. Si `boolCapture` est mis à true, la phase de *bubbling* existera aussi.
+
+### Arrêter la propagation de l'événement ou les comportements par défaut
+Il est possible de cesser la propagation des événements dans le DOM ou bien les comportements par défaut. Pour prévenir le comportement par défaut (soumission d'un formulaire sur le clic du bouton submit ou sur la touche "Enter", changement de page sur le clic d'une balise `<a>`, etc), le gestionnaire d'événement peut appeler la méthode `Event.preventDefault()`. Il est aussi possible d'arrêter la propagation de l'événement (capture ou bubbling) à travers le DOM. La méthode `Event.stopPropagation()` permet d'arrêter la propagation de l'événement à travers le DOM, c'est-à-dire que les autres gestionnaires attachés à la cible seront appelés, mais les autres niveaux de propagation ne seront pas appelés. Pour empêcher les autres gestionnaires d'événement sur le même objet, il est aussi possible d'arrêter immédiatement la propagation en utilisant la méthode `Event.stopImmediatePropagation()`. Dans ce cas, les autres gestionnaires du même événement ne seront pas appelées. 
+
+## Objet Event
+Chaque type d'événement défini ses propres propriétés, mais il existe des propriétés de base plus générales qui sont partagées par plusieurs types.
+
+> Propriétés :
+> - Événement.clientX, Événement.clientY
+>   - Contient la position du pointeur de la souris lors de l'événement
+> - Événement.currentTarget
+>   - Contient l'élément qui est la cible actuel de l'événement. Si l'événement se propage, le currentTarget change
+> - Événement.originalTarget, Événement.target
+>   - Contient l'élément qui est la cible originale de l'événement.
+> - Événement.preventBubble()
+>   - Arrête la phase de bubbling
+>- Événement.preventCapture()
+>   - Arrête la phase de capture
+> - Événement.preventDefault()
+>   - Prévient le comportement par défaut de l'événement.
+> - Événement.stopPropagation()
+>   - Arrête la propagation de l'événement dans sa phase actuelle (*capture* ou *bubbling*).
+
+### Quelques-uns des événements
+Voici une liste non exhaustive de quelques événements intéressants
+
+- abort
+    - Annulation du chargement par l'usager
+- blur
+    - L'élément perd le focus
+- change
+    - Changement du contenu d'un élément (lancé seulement sur la fin du changement, pas sur chaque touche)
+- click
+    - Sur un clic de souris/clavier/sélection gestuelle
+- contextmenu
+    - Quand le menu contextuelle est appelé
+- dblclick
+    - Sur un double clique
+- drag
+    - Sur le déplacement d'un élément (drag) (Activé sur la source)
+- dragend
+    - Quand le glisser cesse (Activé sur la source)
+- dragenter
+    - Début du drag (Activé sur la cible)
+- dragleave
+    - Fin du drag (Activé sur la cible)
+- dragover
+    - sur le déplacement d'un élément (Activé sur la cible)
+- dragstart
+    - L'usager initialise un drag-and-drop (Activé sur la source)
+- drop
+    - L'usager a terminé le drag-and-drop (Activé sur la cible)
+- error
+    - Chargement de la ressource en erreur (erreur de réseau)
+- focus
+    - L'élément a obtenu le focus
+- input
+    - Un input a été fait sur un élément d'un formulaire (lancé plus souvent que onchange)
+- keydown
+    - L'usager appuie sur une touche
+- keypress
+    - Le keypress génère un caractère
+- keyup
+    - L'usager relâche une touche
+- load
+    - Le chargement de la ressource est complété
+- unload
+    - Lancé quand le document ferme (le navigateur ferme ou un changement de page)
+- mousedown
+    - L'usager appuie sur un bouton de souris
+- mousemove
+    - L'usager bouge la souris
+- mouseout
+    - La souris quitte un élément
+- mouseover
+    - La souris est au-dessus d'un élément
+- mouseup
+    - L'usager relâche le bouton
+- mousewheel
+    - L'usager tourne la molette de souris
+- reset
+    - Le formulaire est effacé (reset)
+- scroll
+    - La barre de défilement d'un élément est utilisée
+- select
+    - L'usager sélectionne du texte dans un élément de formulaire
+- submit
+    - Quand un formulaire est soumis
+
+# Stratégies et astuces de travail avec les événements
+À venir (ou pas)
+
+
+# Exercices sur la gestion des événements
+À venir (ou pas)
 
 
 # Sources additionnelles
-* [Classe - JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Classes)
+<!-- * [Classe - JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Classes)-->
 
 
 

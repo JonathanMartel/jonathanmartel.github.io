@@ -107,7 +107,7 @@ let em = para.querySelectorAll("em");
 Cet exemple retourne un `NodeList` de tous les éléments `<em>` qui sont descendant du premier élément `<p>`.
 
 
-# Navigation dans le DOM
+# Navigation dans le *DOM*
 
 Une fois que la requête nous renvoie un résultat valide, il est possible d'utiliser la représentation en arbre du DOM pour se promener d'un noeud à un autre ou d'un élément à un autre. Le DOM fait une distinction entre noeud (`Node`) et élément (`Element`). Les `Element` sont des `Node`, mais ces derniers ne sont pas tous des `Element`. Par exemple, les fragments de texte sont des noeuds dans l'arbre mais ne sont pas des éléments. Le texte dans une balise `<p>` est un noeud, mais n'est pas un élément. La balise `<p>` est un élément et un noeud. 
 > Il faut parfois utiliser des méthodes et des propriétés des `node` pour manipuler les éléments du DOM, mais il faut toujours être prudent puisque les `node` peuvent référer à des saut de ligne, des commentaires HTML ou bien d'autres fragments que l'on ne désire pas manipuler habituellement.
@@ -147,7 +147,7 @@ Une fois que la requête nous renvoie un résultat valide, il est possible d'uti
 > - Element.childElementCount
 >   - Contient le nombre d'élément qui sont enfants de Element.
 
-# Objet Element
+# Objet *Element*
 L'objet `Element` possède d'autres propriétés et méthodes qui permettent de manipuler leurs attributs, leur contenu et leur apparence. La section suivante n'est pas une présentation exhaustive de tous ces éléments, mais une présentation générale qui sera complétée dans chaque section spécifiquement liés à un usage.
 
 Les attributs des balises peuvent être directement lu comme des propriétés des objets de type `Element`. Pour des fins de clarification du code, il est parfois plus utile d'utiliser les méthodes propres à la lecture et à l'écriture de ces attributs. Le DOM défini 4 méthodes d'accès aux attributs des balises. 
@@ -164,13 +164,13 @@ Les attributs des balises peuvent être directement lu comme des propriétés de
 
 Il faut noter que ces méthodes ne sont pas appropriées pour modifier l'attribut class d'un élément. Le DOM défini des méthodes spécifiques pour lire et modifier les classes des éléments ((voir section Manipulation du CSS](lien)).
 
-# Manipulation du contenu des objets de type Element
+# Manipulation du contenu des objets de type *Element*
 
-Le contenu des objets de type `Element` varie beaucoup d'un document à l'autre. On considèrera par contre qu'il peut être lu de 3 façons distinctes. Premièrement, comme une chaine HTML, incluant toute les balises HTML qui sont incluses dans l'élément. Deuxièmement, comme une chaine de caractère en texte seulement, c'est-à-dire sans les balises HTML contenu dans le texte et troisièmement, comme une série de noeud et d'élément qui possèdent eu aussi des noeuds et des éléments. Selon ce que l'on veut faire avec l'élément trouvé, on pourra utiliser l'une des trois manières de voir le contenu d'un élément (ou bien un mélange des trois). Chaque manière utilise des méthodes et des propriétés distinctes.
+Le contenu des objets de type `Element` varie beaucoup d'un document à l'autre. On considèrera par contre qu'il peut être lu de 3 façons distinctes. Premièrement, comme une chaine HTML, incluant toute les balises HTML qui sont incluses dans l'élément. Deuxièmement, comme une chaine de caractère en texte seulement, c'est-à-dire sans les balises HTML contenu dans le texte et troisièmement, comme une série de noeuds et d'éléments qui possèdent eux aussi des noeuds et des éléments. Selon ce que l'on veut faire avec l'élément trouvé, on pourra utiliser l'une des trois manières de voir le contenu d'un élément (ou bien un mélange des trois). Chaque manière utilise des méthodes et des propriétés distinctes.
 
 ## Comme une chaine HTML
 
-Pour récupérer le contenu d'un objet `Element`, il faut utiliser la propriété innerHTML. Celle-ci contient la chaine HTML qui est dans l'élément trouvé.
+Pour récupérer le contenu d'un objet `Element`, il faut utiliser la propriété `innerHTML`. Celle-ci contient la chaine HTML qui est dans l'élément trouvé. Elle peut aussi être écrite pour modifier le DOM (insérer, remplacer ou effacer des éléments du DOM)
 
 ## Comme une chaine texte
 
@@ -192,6 +192,7 @@ Exemple :
 let elPara = document.createElement("p");   // Crée un Element de type <p>
 let texte = document.createTextNode("Mon texte") // Crée un TextNode.
 ```
+
 ## Insérer des éléments
 Ces deux méthodes crée l'objet dans le document, mais ne le place pas dans le DOM. Il n'apparait donc pas dans la page HTML. La deuxième étape consiste à insérer le noeud dans l'arbre, donc au bon endroit dans le document. Pour ce faire, il faut utiliser une des méthodes d'ajout de noeud (ou d'élément) dans le DOM. 
 > Méthode d'ajout au DOM
@@ -236,21 +237,53 @@ parentNode.replaceChild(document.createElement("p"), n);
 ```
 
 ## Méthodes alternatives de manipulation du DOM
-Comme pour bien des choses, il existe des manières alternatives pour effectuer les manipulations du DOM précédemment exposés. Certaines sont plus performances, d'autres plus simples ou bien ne sont qu'une version différente de produire le même résultat. Les méthodes précédemment exposés ont l'avantage d'être sécuritaire et de prétraiter le contenu passé en paramètre avant d'effectuer l'insertion dans le DOM. C'est d'autant plus important si les éléments insérés proviennent de données entrées par un utilisateur. 
+Comme pour bien des choses, il existe des manières alternatives pour effectuer les manipulations du DOM précédemment exposés. Certaines sont plus performantes (rapidité d'exécution), d'autres plus simples ou bien ne sont qu'une version différente de produire le même résultat. Les méthodes précédemment exposés ont l'avantage d'être sécuritaire et de prétraiter le contenu passé en paramètre avant d'effectuer l'insertion dans le DOM. C'est d'autant plus important si les éléments insérés proviennent de données entrées par un utilisateur. Cela évite l'insertion de code malicieux. 
 
-À venir...
+### La propriété *innerHTML*
+La propriété innerHTML est la manière la plus simple, mais pas sécuritaire, pour effectuer des modifications aux DOM. Elle permet d'injecter des chaines de caractères qui seront interprété par le navigateur comme des noeuds. L'exemple d'insertion précédent prend la forme suivante en utilisant `innerHTML`
+```js
+const elMain = document.querySelector("main");          // Récupère le <main>
+const sNoeudAInserer = "<p>Mon texte</p>";
+elMain.innerHTML = sNoeudAInserer;
+```
+
+En jumelant l'utilisation des littéraux de gabarit, nous pouvons créer des solutions dynamiques d'insertion assez simplement.
+```js
+let taches = [{ 
+                tache:"Tache 1", 
+                statut: "fini"
+              },
+              { 
+                tache:"Tache 2", 
+                statut: "encours"
+              },
+              { 
+                tache:"Tache 3", 
+                statut: "planif"
+              }];
+
+const conteneurTaches = document.querySelector("ul.liste-tache");
+conteneurTaches.innerHTML = ""; // Vide la liste
+taches.forEach((uneTache)=>{     // Pour chaque tache
+    let chaineTache = `<li class="${uneTache.statut}">${uneTache.tache}</li>`;   
+    conteneurTaches.innerHTML += chaineTache;
+})
+```
+Le code précédant insère dans le DOM (ici un `ul.liste-tache`) une liste de tâche et place une classe selon le statut de celle-ci. La chaineTache est concaténée dans le DOM. La liste est vidée en effaçant directement le contenu de `conteneurTaches.innerHTML`
+La ligne `conteneurTaches.innerHTML += chaineTache;` pourrait être remplacée par `conteneurTaches.insertAdjacentHTML("beforeend", chaineTache);` pour un résultat similaire. 
+
+# Stratégies et astuces de travail avec le DOM
+À venir (ou pas)
 
 
-# Stratégies et astuces de travail avec les objets
-
-
-
-# Exercices sur les objets
-
+# Exercices sur le DOM
+À venir (ou pas)
 
 
 # Sources additionnelles
-* [Classe - JavaScript \| MDN](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Classes)
+* [Référence du DOM - Référence Web API \| MDN](https://developer.mozilla.org/fr/docs/Web/API/Document_Object_Model)
+* [Element - Référence Web API \| MDN](https://developer.mozilla.org/fr/docs/Web/API/Element)
+* [Node - Référence Web API \| MDN](https://developer.mozilla.org/fr/docs/Web/API/Node)
 
 
 
