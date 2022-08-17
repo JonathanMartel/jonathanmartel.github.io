@@ -1,7 +1,7 @@
 ---
 layout: note_cours
 permalink: /note-de-cours/js-note-de-cours-dom-event
-title: "Le DOM"
+title: "La gestion des événements"
 path: javascript-DOM-evenement.md
 date: "2022-08-16"
 tag: js
