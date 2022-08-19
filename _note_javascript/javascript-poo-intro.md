@@ -274,7 +274,6 @@ Les méthodes sont définis de la même manière que le constructeur, directemen
 
 Syntaxe :
 ```js
-// Prototype de l'objet Portee
 class NomObjet  {
     constructor (){}
 
