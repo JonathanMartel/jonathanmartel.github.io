@@ -74,13 +74,13 @@ requete.send("requete=maRequete&duree=10&pays=Canada&fichier=true");    // Envoi
 #### Recevoir une réponse et la traiter
 Dans la majorité des cas, la requête Ajax recevra une réponse qui devra être traitée par le script d'appel. Dans ces cas, il faut configurer un gestionnaire de réponse à l'aide de l'événement `readystatechange`. Cet événement est appelé à chaque changement de la propriété `readyState`. Celle-ci défini l'état du client XHR. Elle possède l'une des valeurs suivantes :
 
-  **Constante**      **Valeur**   **Signification**
------------------- ------------ ---------------------------------------------------
-  UNSENT             0            La méthode open() n'a pas été appelée.
-  OPENED             1            La méthode open() a été appelée.
-  HEADERS_RECEIVED   2            Les entêtes ont été reçus par le serveur.
-  LOADING            3            Le corps de la réponse est en train d'être reçu.
-  DONE               4            La réponse a été reçue complètement.
+|  **Constante**  |    **Valeur** | **Signification** |
+|------------------ |------------ |---------------------------------------------------|
+|  UNSENT           |  0          |  La méthode open() n'a pas été appelée.|
+|  OPENED           |  1          |  La méthode open() a été appelée.|
+|  HEADERS_RECEIVED |  2          |  Les entêtes ont été reçus par le serveur.|
+|  LOADING          |  3          |  Le corps de la réponse est en train d'être reçu.|
+|  DONE             |  4          |  La réponse a été reçue complètement.|
 
 Avant de traiter la réponse du serveur, il faut attendre que la valeur `4` (ou la constante `XMLHttpRequest.DONE`) soit atteinte. Il est souvent nécessaire de valider que le statut de la requête (le code de réponse de la requête HTTP) soit bien 200. Un code 401 (non authorisé), 404 (non trouvé) ou 500 (Erreur interne) indique un problème dans la requête. 
 
@@ -97,12 +97,12 @@ requete.addEventListener("readystatechange", function () {
 }
 ```
 D'autres événements sur l'objet XHR ont été implanté dans certains navigateurs et peuvent remplacer l'utilisation de `readyStateChange`. Le tableau suivant résume ces événements : 
-**Constante**      **Description**
------------------- ---------------------------------------------------
-  progress          Événement de progression
-  load              Transfert complété et réussi
-  error             Erreur dans la requête
-  abort             Requête annulée
+|**Constante**      |   **Description**                     |
+|------------------ |-------------------------------------- |
+|  progress         |   Événement de progression            |
+|  load             |   Transfert complété et réussi        |
+|  error            |   Erreur dans la requête              |
+|  abort            |   Requête annulée                     |
 
 Exemple :
 ```js
