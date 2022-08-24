@@ -12,7 +12,7 @@ collection: note_javascript
    
 ---
 
-La programmation orientée o.
+
 
 <div class="toc" markdown="1">
 <span class="gamma">Table des matières</span>
