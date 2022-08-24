@@ -97,12 +97,14 @@ requete.addEventListener("readystatechange", function () {
 }
 ```
 D'autres événements sur l'objet XHR ont été implanté dans certains navigateurs et peuvent remplacer l'utilisation de `readyStateChange`. Le tableau suivant résume ces événements : 
-|**Constante**      |   **Description**                     |
-|------------------ |-------------------------------------- |
+
+|   **Constante**      |   **Description**   |
+|------------------ |--------------------------------------|
 |  progress         |   Événement de progression            |
 |  load             |   Transfert complété et réussi        |
 |  error            |   Erreur dans la requête              |
 |  abort            |   Requête annulée                     |
+
 
 Exemple :
 ```js
