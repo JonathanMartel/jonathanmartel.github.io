@@ -1453,11 +1453,10 @@ pre code {
   color: #fff; }
   .nav__external {
     /*width: 250px;*/
-    margin-left:50px;
     width: 100vw;
     opacity: 1;
     background: #604C8D;
-    padding: 5px; }
+    padding: 5px 50px; }
   .nav__link {
     position: relative;
     color: #fff;
