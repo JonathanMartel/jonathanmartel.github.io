@@ -106,7 +106,7 @@ Syntaxe :
 ```js
 Element.addEventListener(strEvenement, fctFonction,[options])
 ```
-`addEventlistener` attache la fonction `fctFonction` sur l'événement `strEvenement` de l'objet `Element`. Le paramètre `options` prend normalement la forme d'un objet littéral et permet de spécifier des options lors de l'appel de `addEventListener()`. Il peut prendre trois propriété booléen : `capture`, `once` et `passive`. Ce paramètre est optionnel, mais peut être requis dans certains cas (Voir la sous-section [Propagation des événements](lien) pour plus de détails et [Retrait d'un gestionnaire d'événements](lien)). Pour des raisons de compatibilité, il peut aussi prendre une valeur booléen. Dans ce cas, il ne servira qu'à définir l'option `capture`. 
+`addEventlistener` attache la fonction `fctFonction` sur l'événement `strEvenement` de l'objet `Element`. Le paramètre `options` prend normalement la forme d'un objet littéral et permet de spécifier des options lors de l'appel de `addEventListener()`. Il peut prendre trois propriété booléen : `capture`, `once` et `passive`. Ce paramètre est optionnel, mais peut être requis dans certains cas (Voir la sous-section [Propagation des événements](#propagation-des-événements) pour plus de détails et [Retrait d'un gestionnaire d'événements](#retrait-dun-gestionnaire-dévénements)). Pour des raisons de compatibilité, il peut aussi prendre une valeur booléen. Dans ce cas, il ne servira qu'à définir l'option `capture`. 
 
 L'exemple suivant enregistre deux gestionnaires pour l'événement `click` d'un bouton.
 
