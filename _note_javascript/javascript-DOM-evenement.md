@@ -104,9 +104,9 @@ La méthode `addEventListener()` est défini sur l'objet window et pour la major
 
 Syntaxe : 
 ```js
-Element.addEventListener(strEvenement, fctFonction,[boolCapture])
+Element.addEventListener(strEvenement, fctFonction,[options])
 ```
-`addEventlistener` attache la fonction `fctFonction` sur l'événement `strEvenement` de l'objet `Element`. Le paramètre `boolCapture` prend normalement la valeur false. Ce paramètre est optionnel, mais peut être requis dans certains cas. (Voir la sous-section [Propagation des événements](lien) pour plus de détails).
+`addEventlistener` attache la fonction `fctFonction` sur l'événement `strEvenement` de l'objet `Element`. Le paramètre `options` prend normalement la forme d'un objet littéral et permet de spécifier des options lors de l'appel de `addEventListener()`. Il peut prendre trois propriété booléen : `capture`, `once` et `passive`. Ce paramètre est optionnel, mais peut être requis dans certains cas (Voir la sous-section [Propagation des événements](lien) pour plus de détails et [Retrait d'un gestionnaire d'événements](lien)). Pour des raisons de compatibilité, il peut aussi prendre une valeur booléen. Dans ce cas, il ne servira qu'à définir l'option `capture`. 
 
 L'exemple suivant enregistre deux gestionnaires pour l'événement `click` d'un bouton.
 
@@ -138,12 +138,22 @@ b.addEventListener("click", clicBouton);
 Dans le cas de la fonction nommée `clicBouton`, notez que c'est l'objet function `clicBouton` qui est passé en paramètre et non l'appel de la fonction `clicBouton()`. 
 
 ## Retrait d'un gestionnaire d'événements
-Il est aussi possible de retirer un gestionnaire d'événement en utilisant la méthode `removeEventListener()`
+Il est aussi possible de retirer un gestionnaire d'événement en utilisant la méthode `removeEventListener()`. Il faut alors lui passer la même fonction de rappel et les mêmes options. 
 
 Syntaxe :
 ```js
-cible.removeEventListener(strEvenement, fctFonction,[boolCapture]);
+cible.removeEventListener(strEvenement, fctFonction,[options]);
 ```
+> Dans les cas où un gestionnaire d'événement doit être retiré à la suite de son premier appel, mieux vaut utiliser l'option `once:true`. 
+
+Exemple :
+```js
+let b = document.querySelector('.bouton');
+b.addEventListener("click", function(){
+                                console.log("je ne vais être affiché que sur le premier clique")
+                            }, {once : true});
+```
+
 
 ## Définir un gestionnaire d'événement
 
@@ -165,7 +175,7 @@ Par défaut le gestionnaire d'événement reçoit un objet de type `Event` qui d
 
 Les événements en JavaScript ne sont pas exclusivement générés sur l'élément en cause, mais se propage dans le DOM selon la hiérarchie des éléments. Ainsi, un clique sur un lien dans un paragraphe sera disponible pour l'élément cliqué, mais aussi pour le paragraphe, pour la division dans lequel se trouve le paragraphe, pour la balise corps, pour le document et pour la fenêtre. Cette propagation est très importante dans la configuration et la définition des gestionnaires d'événement. Il n'est donc pas nécessaire d'attacher le gestionnaire d'événement sur l'élément cliqué pour être capable de le gérer. Tous les événements peuvent être capté à un niveau supérieur ou inférieur selon les paramètres et les besoins.
 
-Il existe deux phases dans la propagation de l'événement. La première phase, la phase de *capture*, est disponible lorsque le paramètre `boolCapture` de la méthode `addEventListener()` est mise à `true`. Ceci permet aux éléments qui sont les ancêtres de la cible de l'événement de capter l'événement avant la cible originale. Ainsi, si l'on clique sur un paragraphe dans une division, celle-ci pourrait capter l'événement avant le paragraphe et ainsi en faire un traitement. La seconde phase est le *bubbling* qui permet aux éléments qui sont les ancêtres de la cible de l'événement de recevoir aussi l'événement, mais après la cible originale. Si `boolCapture` est mis à true, la phase de *bubbling* existera aussi.
+Il existe deux phases dans la propagation de l'événement. La première phase, la phase de *capture*, est disponible lorsque le paramètre `capture` de la méthode `addEventListener()` est mise à `true`. Ceci permet aux éléments qui sont les ancêtres de la cible de l'événement de capter l'événement avant la cible originale. Ainsi, si l'on clique sur un paragraphe dans une division, celle-ci pourrait capter l'événement avant le paragraphe et ainsi en faire un traitement. La seconde phase est le *bubbling* qui permet aux éléments qui sont les ancêtres de la cible de l'événement de recevoir aussi l'événement, mais après la cible originale. Si `capture` est mis à true, la phase de *bubbling* existera aussi.
 
 ### Arrêter la propagation de l'événement ou les comportements par défaut
 Il est possible de cesser la propagation des événements dans le DOM ou bien les comportements par défaut. Pour prévenir le comportement par défaut (soumission d'un formulaire sur le clic du bouton submit ou sur la touche "Enter", changement de page sur le clic d'une balise `<a>`, etc), le gestionnaire d'événement peut appeler la méthode `Event.preventDefault()`. Il est aussi possible d'arrêter la propagation de l'événement (capture ou bubbling) à travers le DOM. La méthode `Event.stopPropagation()` permet d'arrêter la propagation de l'événement à travers le DOM, c'est-à-dire que les autres gestionnaires attachés à la cible seront appelés, mais les autres niveaux de propagation ne seront pas appelés. Pour empêcher les autres gestionnaires d'événement sur le même objet, il est aussi possible d'arrêter immédiatement la propagation en utilisant la méthode `Event.stopImmediatePropagation()`. Dans ce cas, les autres gestionnaires du même événement ne seront pas appelées. 
